@@ -2,7 +2,7 @@
 
 All invitation routes use the same page layouts, artwork, styles, and animations. Route-specific content is configured in `src/invite-config.ts` and applies to both languages.
 
-The live site is deployed from this repository with GitHub Pages: <https://suresh-itrazo.github.io/suresh-anushka-wedding-invitation/>. GitHub Pages serves this public repository's source and invitation artwork openly.
+The GitHub Pages deployment target is <https://sureshwedsanushka.github.io/invitation/>. GitHub Pages requires this project repository to be public on the free plan, which makes the source and invitation artwork publicly viewable.
 
 | Route | Family invitation | Events |
 | --- | --- | --- |
