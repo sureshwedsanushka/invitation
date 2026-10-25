@@ -1,0 +1,1481 @@
+[
+  {
+    "number": 1,
+    "art": [
+      {
+        "id": "PBcNzGSVs2KJ6Kfg-LBmZxDlfHr6WDtwS",
+        "asset": "MAHXC44dU-Q",
+        "label": "opening-background.png",
+        "src": "/assets/opening-background.png",
+        "box": {
+          "type": "SHAPE",
+          "position": {
+            "top": 15,
+            "left": -11
+          },
+          "dimension": {
+            "width": 1080,
+            "height": 1920
+          }
+        }
+      },
+      {
+        "id": "PBcNzGSVs2KJ6Kfg-LBpjmWyJZ81234QL",
+        "asset": "MAHXC9qzQdw",
+        "label": "Antique gold monogram with subtle gold foil shine matching border",
+        "src": "/assets/monogram.png",
+        "box": {
+          "type": "SHAPE",
+          "position": {
+            "top": 756.6793154861725,
+            "left": 379.70380423623016
+          },
+          "dimension": {
+            "width": 358.2154609864664,
+            "height": 331.2934608612818
+          }
+        }
+      },
+      {
+        "id": "PBcNzGSVs2KJ6Kfg-LBg2Bw7z4K093G5l",
+        "asset": "MAGpXHzORxY",
+        "label": "MAGpXHzORxY",
+        "src": "/assets/ganesh-opening.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 88.80526841061186,
+            "left": 502.2939719280853
+          },
+          "dimension": {
+            "width": 78.50709277226495,
+            "height": 99.37606680033538
+          }
+        }
+      },
+      {
+        "id": "PBcNzGSVs2KJ6Kfg-LBxPxLGGDxhPq4gQ",
+        "asset": "MAG5mA4Lkc0",
+        "label": "MAG5mA4Lkc0",
+        "src": "/assets/invocation.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 78.82839583293409,
+            "left": 509.9608649488436
+          },
+          "dimension": {
+            "width": 69.70133956123945,
+            "height": 325.8523790889271
+          }
+        }
+      }
+    ],
+    "text": []
+  },
+  {
+    "number": 2,
+    "art": [
+      {
+        "id": "PBvY6gltzRpLmvBm-LBWbTB9XPxQR5Zk1",
+        "asset": "MAHXDE4nOtE",
+        "label": "maharashtrian-feet-background.png",
+        "src": "/assets/announcement.png",
+        "box": {
+          "type": "SHAPE",
+          "position": {
+            "top": 0,
+            "left": 0
+          },
+          "dimension": {
+            "width": 1080.313,
+            "height": 1920.556
+          }
+        }
+      }
+    ],
+    "text": [
+      {
+        "id": "PBvY6gltzRpLmvBm-LBpbp7dX3QbvNl1S",
+        "text": "TOGETHER",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 1192.845,
+            "left": 60.01700000000005
+          },
+          "dimension": {
+            "width": 960.278,
+            "height": 42.012
+          }
+        }
+      },
+      {
+        "id": "PBvY6gltzRpLmvBm-LBXlP0MPqktH1tFp",
+        "text": "A BEAUTIFUL BEGINNING",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 1233.357,
+            "left": 60.01700000000005
+          },
+          "dimension": {
+            "width": 960.278,
+            "height": 45.013
+          }
+        }
+      },
+      {
+        "id": "PBvY6gltzRpLmvBm-LBgbtPJQkhfHBPvD",
+        "text": "Suresh",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 1359.393,
+            "left": 60.01700000000005
+          },
+          "dimension": {
+            "width": 960.278,
+            "height": 127.537
+          }
+        }
+      },
+      {
+        "id": "PBvY6gltzRpLmvBm-LBnfcyMZ0ZxQzjc9",
+        "text": "and",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 1512.438,
+            "left": 60.01700000000005
+          },
+          "dimension": {
+            "width": 960.278,
+            "height": 75.022
+          }
+        }
+      },
+      {
+        "id": "PBvY6gltzRpLmvBm-LBNMrsLSGYbYcSM4",
+        "text": "Anushka",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 1605.4650000000001,
+            "left": 387.95678125000006
+          },
+          "dimension": {
+            "width": 304.3984375,
+            "height": 135
+          }
+        }
+      },
+      {
+        "id": "PBvY6gltzRpLmvBm-LBcYNBGzSHD7slgb",
+        "text": "ARE GETTING MARRIED",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 1769.012,
+            "left": 60.01700000000005
+          },
+          "dimension": {
+            "width": 960.278,
+            "height": 52.515
+          }
+        }
+      }
+    ]
+  },
+  {
+    "number": 3,
+    "art": [
+      {
+        "id": "PBtQjF9RtSl73sdP-LBN6RkwplMqQrHqw",
+        "asset": "MAHXOeW8smg",
+        "label": "background.png",
+        "src": "/assets/invitation.png",
+        "box": {
+          "type": "SHAPE",
+          "position": {
+            "top": -5.573000000000093,
+            "left": 0
+          },
+          "dimension": {
+            "width": 1080.313,
+            "height": 1920.556
+          }
+        }
+      },
+      {
+        "id": "PBtQjF9RtSl73sdP-LB7n5m9RvWq0vRyJ",
+        "asset": "MAFpQcEiLwc",
+        "label": "MAFpQcEiLwc",
+        "src": "/assets/ganesh-invitation.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 6.83204870123258,
+            "left": 453.2869404124897
+          },
+          "dimension": {
+            "width": 161.4811191750205,
+            "height": 137.2589512987674
+          }
+        }
+      }
+    ],
+    "text": [
+      {
+        "id": "PBtQjF9RtSl73sdP-LBjWwplqLKq1m4Ck",
+        "text": "Anushka",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 725.6569999999999,
+            "left": 63.01799999999997
+          },
+          "dimension": {
+            "width": 954.276,
+            "height": 132.038
+          }
+        }
+      },
+      {
+        "id": "PBtQjF9RtSl73sdP-LBbCCJRbr29MD5PF",
+        "text": "WITH THE BLESSINGS OF",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 214.09100000000004,
+            "left": 63.01799999999997
+          },
+          "dimension": {
+            "width": 954.276,
+            "height": 45.013
+          }
+        }
+      },
+      {
+        "id": "PBtQjF9RtSl73sdP-LBtM7JDTQc1cLlcG",
+        "text": "OUR BELOVED PARENTS",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 268.107,
+            "left": 63.01799999999997
+          },
+          "dimension": {
+            "width": 954.276,
+            "height": 45.013
+          }
+        }
+      },
+      {
+        "id": "PBtQjF9RtSl73sdP-LBC5yXhNX61DJVk6",
+        "text": "Mrs. Shweta & Mr. Abhay Subhedar",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 355.149,
+            "left": 63.01799999999997
+          },
+          "dimension": {
+            "width": 954.276,
+            "height": 58
+          }
+        }
+      },
+      {
+        "id": "PBtQjF9RtSl73sdP-LBdgS2lzzqccS1nF",
+        "text": "cordially invite you\nto celebrate the wedding of their daughter",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 556.178,
+            "left": 63.01799999999997
+          },
+          "dimension": {
+            "width": 954.276,
+            "height": 140
+          }
+        }
+      },
+      {
+        "id": "PBtQjF9RtSl73sdP-LBWVkvDRpsrf7N1z",
+        "text": "with",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 867.7049999999999,
+            "left": 498.28099999999995
+          },
+          "dimension": {
+            "width": 83.75,
+            "height": 85
+          }
+        }
+      },
+      {
+        "id": "PBtQjF9RtSl73sdP-LBXSS5GqZVtyJ2bM",
+        "text": "Suresh",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 942.727,
+            "left": 63.01799999999997
+          },
+          "dimension": {
+            "width": 954.276,
+            "height": 135.039
+          }
+        }
+      },
+      {
+        "id": "PBtQjF9RtSl73sdP-LBP5rkdpqYFQ8RJx",
+        "text": "son of",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 1072.827,
+            "left": 63.01799999999997
+          },
+          "dimension": {
+            "width": 954.276,
+            "height": 67.52
+          }
+        }
+      },
+      {
+        "id": "PBtQjF9RtSl73sdP-LBjN2dlXlm6JLxQt",
+        "text": "Mrs. Sailee & Mr. Chandrakant Bhandari",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 1152.347,
+            "left": 63.01799999999997
+          },
+          "dimension": {
+            "width": 954.276,
+            "height": 168
+          }
+        }
+      },
+      {
+        "id": "PBtQjF9RtSl73sdP-LBbPQs0hHkFvplK2",
+        "text": "WITH YOUR BLESSINGS, WE BEGIN",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 1378.668617689908,
+            "left": 63.01799999999997
+          },
+          "dimension": {
+            "width": 954.276,
+            "height": 32
+          }
+        }
+      }
+    ]
+  },
+  {
+    "number": 4,
+    "art": [
+      {
+        "id": "PBbFfmd48133c3Wq",
+        "asset": "MAHXU8t78fM",
+        "label": "MAHXU8t78fM",
+        "src": "/assets/canva/MAHXU8t78fM.png",
+        "box": {
+          "position": {
+            "top": 0,
+            "left": 0
+          },
+          "dimension": {
+            "width": 1080,
+            "height": 1920
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LBz9rTNY38hCFXf6",
+        "asset": "MAHXUxuZ42E",
+        "label": "MAHXUxuZ42E",
+        "src": "/assets/canva/MAHXUxuZ42E.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1210.5141499365882,
+            "left": 44.76089266737512
+          },
+          "dimension": {
+            "width": 990.4782146652498,
+            "height": 231.56770162205626
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LBKnpcxljVjXtJk4",
+        "asset": "MAHXU0338lQ",
+        "label": "MAHXU0338lQ",
+        "src": "/assets/canva/MAHXU0338lQ.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1419.9776618583574,
+            "left": 44.76089266737512
+          },
+          "dimension": {
+            "width": 990.4782146652498,
+            "height": 419.9796043054566
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LB5Vs5g30T2W5Fc7",
+        "asset": "MAHXU17RKeE",
+        "label": "MAHXU17RKeE",
+        "src": "/assets/canva/MAHXU17RKeE.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 80.04273383618613,
+            "left": 44.76089266737512
+          },
+          "dimension": {
+            "width": 165.2551325211947,
+            "height": 398.92799506708786
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LBMVByPpGWbRksFg",
+        "asset": "MAHXU3-Oq4o",
+        "label": "MAHXU3-Oq4o",
+        "src": "/assets/canva/MAHXU3-Oq4o.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 80.04273383618613,
+            "left": 745.7794803050544
+          },
+          "dimension": {
+            "width": 289.4596270275703,
+            "height": 293.6699488752441
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LByMXpd31MlsdYNB",
+        "asset": "MAHXU0jYGts",
+        "label": "MAHXU0jYGts",
+        "src": "/assets/canva/MAHXU0jYGts.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 80.04273383618613,
+            "left": 105.81055945864449
+          },
+          "dimension": {
+            "width": 43.15579893865594,
+            "height": 461.03024232027565
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LB292nJ91lJBDLLY",
+        "asset": "MAHXUx5MSRI",
+        "label": "MAHXUx5MSRI",
+        "src": "/assets/canva/MAHXUx5MSRI.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 80.04273383618613,
+            "left": 126.86216869701323
+          },
+          "dimension": {
+            "width": 228.40996023630095,
+            "height": 503.1334607970132
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LBNnWVvzPdZDl62k",
+        "asset": "MAHXUwU6Q0g",
+        "label": "MAHXUwU6Q0g",
+        "src": "/assets/canva/MAHXUwU6Q0g.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 80.04273383618613,
+            "left": 333.167939233027
+          },
+          "dimension": {
+            "width": 63.15482771510625,
+            "height": 210.51609238368752
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LB3KGXxM1R7Yy0VT",
+        "asset": "MAHXU2NNw84",
+        "label": "MAHXU2NNw84",
+        "src": "/assets/canva/MAHXU2NNw84.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 80.04273383618613,
+            "left": 952.0852508410683
+          },
+          "dimension": {
+            "width": 42.1032184767375,
+            "height": 461.03024232027565
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LBRFbrj8kbPCl6pP",
+        "asset": "MAHXUzHVTPw",
+        "label": "MAHXUzHVTPw",
+        "src": "/assets/canva/MAHXUzHVTPw.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 80.04273383618613,
+            "left": 745.7794803050544
+          },
+          "dimension": {
+            "width": 228.40996023630095,
+            "height": 398.92799506708786
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LBTDv8l2tTmDZ5Cc",
+        "asset": "MAHXU2y-Atg",
+        "label": "MAHXU2y-Atg",
+        "src": "/assets/canva/MAHXU2y-Atg.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1064.1528852680067,
+            "left": 518.422100530672
+          },
+          "dimension": {
+            "width": 63.15482771510625,
+            "height": 85.25901741539344
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LBh1hxF24Gjx2S48",
+        "asset": "MAHXU4yr1AM",
+        "label": "MAHXU4yr1AM",
+        "src": "/assets/canva/MAHXU4yr1AM.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1148.4119026834,
+            "left": 44.76089266737511
+          },
+          "dimension": {
+            "width": 124.20449450637564,
+            "height": 314.72155811361284
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LB4d8wMMtBJ7KSQZ",
+        "asset": "MAHXUzquMW0",
+        "label": "MAHXUzquMW0",
+        "src": "/assets/canva/MAHXUzquMW0.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1127.3602934450314,
+            "left": 44.76089266737512
+          },
+          "dimension": {
+            "width": 433.6631503103963,
+            "height": 545.2366792737506
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LBgpckQfZRHWRgZ5",
+        "asset": "MAHXU0orhhg",
+        "label": "MAHXU0orhhg",
+        "src": "/assets/canva/MAHXU0orhhg.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1336.8238053668006,
+            "left": 126.86216869701326
+          },
+          "dimension": {
+            "width": 104.20546572992532,
+            "height": 126.3096554302125
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LBbQk08STtvkp0WR",
+        "asset": "MAHXU4VkY2I",
+        "label": "MAHXU4VkY2I",
+        "src": "/assets/canva/MAHXU4VkY2I.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1504.184098811832,
+            "left": 44.76089266737512
+          },
+          "dimension": {
+            "width": 165.2551325211947,
+            "height": 252.619310860425
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LBrlrt0NhMZT8Jmn",
+        "asset": "MAHXU6Tmg2I",
+        "label": "MAHXU6Tmg2I",
+        "src": "/assets/canva/MAHXU6Tmg2I.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1189.4625406982195,
+            "left": 911.0346128262493
+          },
+          "dimension": {
+            "width": 124.20449450637564,
+            "height": 357.8773570522688
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LBqkXg05BrTcc1Hf",
+        "asset": "MAHXU-UPB2A",
+        "label": "MAHXU-UPB2A",
+        "src": "/assets/canva/MAHXU-UPB2A.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1148.4119026834,
+            "left": 518.422100530672
+          },
+          "dimension": {
+            "width": 475.7663687871338,
+            "height": 566.2882885121194
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LBM5VRQzlCTtZ2rH",
+        "asset": "MAHXUzRBSXg",
+        "label": "MAHXUzRBSXg",
+        "src": "/assets/canva/MAHXUzRBSXg.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1252.6173684133255,
+            "left": 271.06569197983924
+          },
+          "dimension": {
+            "width": 557.8676448167719,
+            "height": 504.1860412589316
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LB5H4MfPKVr0hYdV",
+        "asset": "MAHXU56qBLM",
+        "label": "MAHXU56qBLM",
+        "src": "/assets/canva/MAHXU56qBLM.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1713.6476107336011,
+            "left": 126.86216869701325
+          },
+          "dimension": {
+            "width": 248.40898901275128,
+            "height": 126.3096554302125
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LBVW629v5s5GxQkg",
+        "asset": "MAHXU8OfHNw",
+        "label": "MAHXU8OfHNw",
+        "src": "/assets/canva/MAHXU8OfHNw.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1671.5443922568638,
+            "left": 704.7288422902354
+          },
+          "dimension": {
+            "width": 330.5102650423894,
+            "height": 168.41287390695
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LBDzZPlQ0qtKLkcq",
+        "asset": "MAHXU1zG8SI",
+        "label": "MAHXU1zG8SI",
+        "src": "/assets/canva/MAHXU1zG8SI.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1567.3389265269384,
+            "left": 911.0346128262493
+          },
+          "dimension": {
+            "width": 124.20449450637564,
+            "height": 189.46448314531875
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LBTmsKHLzlXzJdHC",
+        "asset": "MAGczNakt-4",
+        "label": "MAGczNakt-4",
+        "src": "/assets/canva/MAGczNakt-4.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 905.371432269376,
+            "left": 396.75112026352247
+          },
+          "dimension": {
+            "width": 286.4977594729551,
+            "height": 31.514753542025062
+          }
+        }
+      }
+    ],
+    "text": [
+      {
+        "id": "PBbFfmd48133c3Wq-LBzf371ty3lVkYKR",
+        "text": "Anushka’s\nMehendi",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 312.26507009857175,
+            "left": 340.8756372212284
+          },
+          "dimension": {
+            "width": 415.4296477030106,
+            "height": 260.0811801632998
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LBBq59f9PRrTd67M",
+        "text": "Thursday",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 595.7609198639032,
+            "left": 451.2412502095567
+          },
+          "dimension": {
+            "width": 191.09062763416864,
+            "height": 36.388316839047974
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LBFG0VLkZQrhT8P7",
+        "text": "17",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 633.6832356409843,
+            "left": 494.59972423944333
+          },
+          "dimension": {
+            "width": 96.64938332970164,
+            "height": 117.29999110393423
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LBKtrbH9q802Z3v1",
+        "text": "12:00 Pm Onwards",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 763.9542206810416,
+            "left": 303.8794528294952
+          },
+          "dimension": {
+            "width": 492.2401231174599,
+            "height": 36.388316839047974
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LBc3mTjrHJhfmHdW",
+        "text": "Venue",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 864.3425375200896,
+            "left": 482.22049356447724
+          },
+          "dimension": {
+            "width": 105.51450631355101,
+            "height": 31.60215495324199
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LBtJwXvmMQ1TWCrp",
+        "text": "401 Ram Chs",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 951.667334436489,
+            "left": 437.4207992927413
+          },
+          "dimension": {
+            "width": 195.11386863225283,
+            "height": 31.60215495324199
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LBMz2SwxxjPn5N1c",
+        "text": "Maruti Nagar, Ashokvan\nDahisar East",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 990.6186680255615,
+            "left": 317.06844059825477
+          },
+          "dimension": {
+            "width": 445.86311880349047,
+            "height": 69.31633709108308
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LB9Bm9grswVdSK89",
+        "text": "2026",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 674.1390727734274,
+            "left": 626.4085456996013
+          },
+          "dimension": {
+            "width": 78.74316380241247,
+            "height": 36.388316839047974
+          }
+        }
+      },
+      {
+        "id": "PBbFfmd48133c3Wq-LBWCXHcTMbfJ3Zl2",
+        "text": "Dec",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 674.1390727734274,
+            "left": 394.49775947295524
+          },
+          "dimension": {
+            "width": 70.9062792675415,
+            "height": 36.388316839047974
+          }
+        }
+      }
+    ]
+  },
+  {
+    "number": 5,
+    "art": [
+      {
+        "id": "PBQFPp7Dk9vxtbFc",
+        "asset": "MAHXagLtVwc",
+        "label": "Plain peach texture only — no embedded artwork",
+        "src": "/assets/canva/peach-background.png",
+        "box": {
+          "position": {
+            "top": 0,
+            "left": 0
+          },
+          "dimension": {
+            "width": 1080,
+            "height": 1920
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LBplHNBwrWn095Sc",
+        "asset": "MAHXVHwifJk",
+        "label": "MAHXVHwifJk",
+        "src": "/assets/canva/MAHXVHwifJk.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 676.0036631109247,
+            "left": 461.37028684411666
+          },
+          "dimension": {
+            "width": 22.631155778894474,
+            "height": 90.5246231155779
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LBHZz50DrxtLdqHW",
+        "asset": "MAHXVINLTt4",
+        "label": "MAHXVINLTt4",
+        "src": "/assets/canva/MAHXVINLTt4.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 676.0036631109247,
+            "left": 616.0165179998955
+          },
+          "dimension": {
+            "width": 22.631155778894474,
+            "height": 90.5246231155779
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LBMyQkhQf1ws4Lx1",
+        "asset": "MAHXVGhELHY",
+        "label": "MAHXVGhELHY",
+        "src": "/assets/canva/MAHXVGhELHY.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 858.1597989949748,
+            "left": 428.73015075376884
+          },
+          "dimension": {
+            "width": 222.53969849246232,
+            "height": 24.51708542713568
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LBdxc36CtCLyrVyX",
+        "asset": "MAHXVI9F-ns",
+        "label": "MAHXVI9F-ns",
+        "src": "/assets/canva/MAHXVI9F-ns.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1103.3306532663314,
+            "left": 494.73768844221104
+          },
+          "dimension": {
+            "width": 67.89346733668341,
+            "height": 69.77939698492462
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LB9wcqXj7F2W6LZ0",
+        "asset": "MAHXamstoV4",
+        "label": "Courtyard wall — independent transparent animation layer",
+        "src": "/assets/canva/MAHXamstoV4.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1279.2344497607655,
+            "left": 0
+          },
+          "dimension": {
+            "width": 1080,
+            "height": 275.5980861244019
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LBb0S0qlJRKr24PN",
+        "asset": "MAHXatpKKsM",
+        "label": "Left pavilion and steps — independent transparent animation layer",
+        "src": "/assets/canva/MAHXatpKKsM.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 753.3014354066986,
+            "left": 0
+          },
+          "dimension": {
+            "width": 292.66737513283744,
+            "height": 801.5311004784689
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LBSHXMhvng3LZJ5X",
+        "asset": "MAHXavfPvwk",
+        "label": "Right tree — independent transparent animation layer",
+        "src": "/assets/canva/MAHXavfPvwk.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 708.5167464114834,
+            "left": 741.424017003188
+          },
+          "dimension": {
+            "width": 338.5759829968119,
+            "height": 846.3157894736842
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LBKNtHr3wQrg9XNQ",
+        "asset": "MAHXapWm6pg",
+        "label": "Right pavilion — independent transparent animation layer",
+        "src": "/assets/canva/MAHXapWm6pg.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 891.1004784688996,
+            "left": 921.615302869288
+          },
+          "dimension": {
+            "width": 158.384697130712,
+            "height": 732.6315789473684
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LBdmFyNXrCltZzWT",
+        "asset": "MAHXagQaask",
+        "label": "Left jasmine plant — independent transparent animation layer",
+        "src": "/assets/canva/MAHXagQaask.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1325.1674641148325,
+            "left": 0
+          },
+          "dimension": {
+            "width": 158.384697130712,
+            "height": 252.6315789473684
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LBqbfnL1xn67HVGS",
+        "asset": "MAHXau_PgKE",
+        "label": "Groom — independent transparent animation layer",
+        "src": "/assets/canva/MAHXau_PgKE.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1188.5167464114832,
+            "left": 224.95217853347506
+          },
+          "dimension": {
+            "width": 383.33687566418706,
+            "height": 525.933014354067
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LBPC1KCJ3HC28dWS",
+        "asset": "MAHXaqfOEEY",
+        "label": "Bride — independent transparent animation layer",
+        "src": "/assets/canva/MAHXaqfOEEY.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1210.3349282296654,
+            "left": 449.9043570669501
+          },
+          "dimension": {
+            "width": 608.289054197662,
+            "height": 550.0478468899521
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LBRc0y6Wbr4j78V2",
+        "asset": "MAHXauwyI0E",
+        "label": "Turmeric bowl — independent transparent animation layer",
+        "src": "/assets/canva/MAHXauwyI0E.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1690.3349282296651,
+            "left": 382.18916046758767
+          },
+          "dimension": {
+            "width": 135.43039319872477,
+            "height": 70.04784688995215
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LBSw3mQnr93bTpDC",
+        "asset": "MAHXarVGB-Y",
+        "label": "Loose flower 1 — independent transparent animation layer",
+        "src": "/assets/canva/MAHXarVGB-Y.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1759.2344497607655,
+            "left": 403.99574920297556
+          },
+          "dimension": {
+            "width": 47.05632306057386,
+            "height": 70.04784688995215
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LBC31VCxj0m9WyNk",
+        "asset": "MAHXajV88xU",
+        "label": "Loose flower 2 — independent transparent animation layer",
+        "src": "/assets/canva/MAHXajV88xU.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1713.3014354066986,
+            "left": 516.471838469713
+          },
+          "dimension": {
+            "width": 68.86291179596174,
+            "height": 70.04784688995215
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LBj3dj7WjHQ5g62Q",
+        "asset": "MAHXag-Q3uM",
+        "label": "Loose flower 3 — independent transparent animation layer",
+        "src": "/assets/canva/MAHXag-Q3uM.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1736.267942583732,
+            "left": 584.1870350690755
+          },
+          "dimension": {
+            "width": 68.86291179596174,
+            "height": 70.04784688995215
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LB6Dy7rKcPrwxpkY",
+        "asset": "MAHXaga5iuc",
+        "label": "Loose flowers 4 — independent transparent animation layer",
+        "src": "/assets/canva/MAHXaga5iuc.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1736.267942583732,
+            "left": 628.9479277364505
+          },
+          "dimension": {
+            "width": 113.62380446333688,
+            "height": 70.04784688995215
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LBK2f5prkb9N24ty",
+        "asset": "MAHXakwRj08",
+        "label": "Left garland — independent transparent animation layer",
+        "src": "/assets/canva/MAHXakwRj08.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": -1.5246570054962945,
+            "left": -13.622741764080729
+          },
+          "dimension": {
+            "width": 429.2454835281615,
+            "height": 435.21531100478467
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LB4G7DT73xRH5mh7",
+        "asset": "MAHXaoh7l8c",
+        "label": "Right garland — independent transparent animation layer",
+        "src": "/assets/canva/MAHXaoh7l8c.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": -1.5246570054962945,
+            "left": 653.0499468650372
+          },
+          "dimension": {
+            "width": 451.0520722635494,
+            "height": 502.9665071770335
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LB66J4ZdG8Q8TDXp",
+        "asset": "MAHXasSxLqk",
+        "label": "Left yellow drape — independent transparent animation layer",
+        "src": "/assets/canva/MAHXasSxLqk.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 729.1205992509364,
+            "left": 0
+          },
+          "dimension": {
+            "width": 100.40366972477065,
+            "height": 730.6067415730338
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LB2P187CbLX2N1Nk",
+        "asset": "MAHXagQvpt8",
+        "label": "Right yellow drape — independent transparent animation layer",
+        "src": "/assets/canva/MAHXagQvpt8.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 810.4868913857679,
+            "left": 991.1009174311926
+          },
+          "dimension": {
+            "width": 88.89908256880733,
+            "height": 633.6479400749064
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LBZ7BjY4PZKjvvGh",
+        "asset": "MAHXapqmAS8",
+        "label": "Left brass vase and floral arrangement — independent transparent animation layer",
+        "src": "/assets/canva/MAHXapqmAS8.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1113.6,
+            "left": 0
+          },
+          "dimension": {
+            "width": 233.39449541284404,
+            "height": 403.6554307116105
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LBBSN9cMnQgYCr8T",
+        "asset": "MAHXavIqYBo",
+        "label": "Right brass vase and floral arrangement — independent transparent animation layer",
+        "src": "/assets/canva/MAHXavIqYBo.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1198.621722846442,
+            "left": 903.1376146788991
+          },
+          "dimension": {
+            "width": 176.86238532110093,
+            "height": 286.2621722846442
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LB4h5w6qSJq7JZJY",
+        "asset": "MAHXai9v1Ec",
+        "label": "Left turmeric tray — independent transparent animation layer",
+        "src": "/assets/canva/MAHXai9v1Ec.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1717.8127340823971,
+            "left": 0
+          },
+          "dimension": {
+            "width": 334.45871559633025,
+            "height": 151.85018726591758
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LBgK3hZnYWKtchSR",
+        "asset": "MAHXanr_F5g",
+        "label": "Right flower bowl and turmeric bowl — independent transparent animation layer",
+        "src": "/assets/canva/MAHXanr_F5g.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1732.314606741573,
+            "left": 817.7614678899083
+          },
+          "dimension": {
+            "width": 262.23853211009174,
+            "height": 173.30337078651687
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LBmQWZTC90Lnm0HD",
+        "asset": "MAHXa5ocDQ4",
+        "label": "Isolated brass lantern — independent animation layer",
+        "src": "/assets/canva/lantern.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1555,
+            "left": 35
+          },
+          "dimension": {
+            "width": 166,
+            "height": 215
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LBs7pdJ3z9gWKtkG",
+        "asset": "MAHXaga5iuc",
+        "label": "Loose flowers beside lantern — independent animation layer",
+        "src": "/assets/canva/MAHXaga5iuc.png",
+        "box": {
+          "type": "RECT",
+          "position": {
+            "top": 1732,
+            "left": 167
+          },
+          "dimension": {
+            "width": 114,
+            "height": 70
+          }
+        }
+      }
+    ],
+    "text": [
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LBNF62fY1l45HRRq",
+        "text": "Haldi",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 286.83643521308903,
+            "left": 167.18697549889282
+          },
+          "dimension": {
+            "width": 745.6260490022144,
+            "height": 359.51101171874996
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LBkkCV7sbxk9xV2x",
+        "text": "Thursday",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 619.4418501715372,
+            "left": 402.260386279347
+          },
+          "dimension": {
+            "width": 277.5819720206212,
+            "height": 42.22386134033203
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LBclyLMTWK4GG9mH",
+        "text": "Dec",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 724.780423987129,
+            "left": 324.28233880580075
+          },
+          "dimension": {
+            "width": 86.40295487581467,
+            "height": 42.22386134033203
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LBSBwvMSDPWnjKtS",
+        "text": "17",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 691.8082608681652,
+            "left": 488.7801334143293
+          },
+          "dimension": {
+            "width": 99.76997456836457,
+            "height": 111.5619794494629
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LBQlT596HrzlcFLJ",
+        "text": "2026",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 724.780423987129,
+            "left": 654.4791954767567
+          },
+          "dimension": {
+            "width": 96.95349919932838,
+            "height": 42.22386134033203
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LB1BwDLgyZXD7wr0",
+        "text": "12:00 pm",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 787.1173864070988,
+            "left": 457.06407935293964
+          },
+          "dimension": {
+            "width": 167.97464179749392,
+            "height": 42.22386134033203
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LBTqWy63QdjLGvLY",
+        "text": "Venue",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 919.943754065254,
+            "left": 452.98036711313284
+          },
+          "dimension": {
+            "width": 156.12410565420072,
+            "height": 42.22386134033203
+          }
+        }
+      },
+      {
+        "id": "PBQFPp7Dk9vxtbFc-LBL899zcCZYrLS0T",
+        "text": "401 Ram Chs\nMaruti Nagar, Ashokvan\nDahisar East",
+        "box": {
+          "type": "TEXT",
+          "position": {
+            "top": 963.073145901471,
+            "left": 307.1086125708736
+          },
+          "dimension": {
+            "width": 467.8854495324955,
+            "height": 117.71150267944336
+          }
+        }
+      }
+    ]
+  }
+]
