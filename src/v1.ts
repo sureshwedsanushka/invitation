@@ -783,12 +783,12 @@ function navigateToScene(scene:HTMLElement,onComplete?:()=>void){
   scene.classList.add('v1-scene-visible');
   const html=document.documentElement;
   html.classList.add('v1-page-transition');
-  const targetY=scene.getBoundingClientRect().top+window.scrollY;
+  const sceneOffset=()=>scene.getBoundingClientRect().top+window.scrollY;
   let finished=false;
   const finish=()=>{
     if(finished)return;
     finished=true;
-    window.scrollTo({top:targetY,left:0,behavior:'instant'});
+    window.scrollTo({top:sceneOffset(),left:0,behavior:'instant'});
     html.classList.remove('v1-page-transition');
     activeSceneIndex=scenes.indexOf(scene);
     scenes.forEach(candidate=>candidate.classList.toggle('v1-scene-visible',candidate===scene));
@@ -796,7 +796,7 @@ function navigateToScene(scene:HTMLElement,onComplete?:()=>void){
     onComplete?.();
   };
   if(prefersReduced.matches){finish();return;}
-  if(Math.abs(window.scrollY-targetY)<1){finish();return;}
+  if(Math.abs(window.scrollY-sceneOffset())<1){finish();return;}
   const from=window.scrollY;
   const duration=850;
   const started=performance.now();
@@ -804,12 +804,26 @@ function navigateToScene(scene:HTMLElement,onComplete?:()=>void){
     if(finished)return;
     const progress=Math.min(1,(now-started)/duration);
     const eased=progress<.5?4*progress*progress*progress:1-Math.pow(-2*progress+2,3)/2;
-    window.scrollTo({top:from+(targetY-from)*eased,left:0,behavior:'instant'});
+    window.scrollTo({top:from+(sceneOffset()-from)*eased,left:0,behavior:'instant'});
     if(progress<1)window.requestAnimationFrame(glide);
     else finish();
   };
   window.requestAnimationFrame(glide);
 }
+
+let resizeAlignmentFrame=0;
+function alignActiveSceneAfterResize(){
+  if(tapLocked)return;
+  window.cancelAnimationFrame(resizeAlignmentFrame);
+  resizeAlignmentFrame=window.requestAnimationFrame(()=>{
+    const activeScene=scenes[activeSceneIndex];
+    if(!activeScene)return;
+    window.scrollTo({top:activeScene.getBoundingClientRect().top+window.scrollY,left:0,behavior:'instant'});
+  });
+}
+window.addEventListener('resize',alignActiveSceneAfterResize,{passive:true});
+window.visualViewport?.addEventListener('resize',alignActiveSceneAfterResize,{passive:true});
+
 function navigateByGesture(direction:1|-1){
   if(tapLocked)return;
   if(activeSceneIndex===0){if(direction>0)advance();return;}
@@ -1037,13 +1051,13 @@ Promise.all(Array.from(page.querySelectorAll('img')).map(img=>img.complete?Promi
   if(prefersReduced.matches){gsap.set(page,{opacity:0});finishIntro();gsap.fromTo(page,{opacity:0},{opacity:1,duration:.45,ease:'sine.out'});return;}
   gsap.set([ganesh,medallion,prayer,...later, ...floral],{opacity:0});
   // Keep its final layout fixed and glide from the centre using a transform.
-  gsap.set(ganesh,{top:'6.2%',y:page.clientHeight*.358});
+  gsap.set(ganesh,{top:'6.2%',yPercent:358});
   gsap.set(medallion,{top:'4.2%',scale:.94,transformOrigin:'50% 50%'});
   gsap.set(prayer,{y:14});
   gsap.set(logo,{scale:.985,transformOrigin:'50% 50%'});
   timeline=gsap.timeline({onComplete:finishIntro});
   timeline.to(ganesh,{opacity:1,duration:.75,ease:'sine.out'},.2)
-    .to(ganesh,{y:0,duration:1.45,ease:'sine.inOut'},1.0)
+    .to(ganesh,{yPercent:0,duration:1.45,ease:'sine.inOut'},1.0)
     .to(medallion,{opacity:1,scale:1,duration:1.0,ease:'sine.inOut'},1.8)
     .to(prayer,{opacity:1,y:0,duration:1.05,ease:'sine.inOut'},2.65)
     .to(later,{opacity:1,duration:1.35,stagger:.16,ease:'sine.inOut'},4.05)

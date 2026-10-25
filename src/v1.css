@@ -326,6 +326,14 @@ body:has(.v1-opening) #root{width:100%;min-height:100svh}
 .v1-wedding-petal{position:absolute;top:-4cqw;width:2.1cqw;height:3.5cqw;min-width:7px;min-height:12px;max-width:12px;max-height:20px;border-radius:82% 16% 76% 24%;background:linear-gradient(145deg,#f4c1b2 0%,#d87579 34%,#ae3d4b 70%,#76232e 100%);box-shadow:inset .35px .4px .5px #ffe2ce99,0 1px 3px #25070a55;opacity:0;transform-origin:50% 54%;animation:v1-wedding-petal-fall var(--fall-duration,14s) var(--fall-delay,0s) linear infinite;animation-play-state:paused;will-change:transform,opacity}
 .v1-wedding-petal::after{content:'';position:absolute;left:45%;top:13%;width:1px;height:67%;border-radius:50%;background:linear-gradient(180deg,#ffead388,#e9a09a18);transform:rotate(-13deg)}
 @media(max-width:600px){.v1-mehendi-card,.v1-haldi-card,.v1-sangeet-card,.v1-wedding-card{width:min(100vw,56.25svh,540px)}}
+/* On portrait phones, let each invitation page use the full visible screen. */
+@media(max-width:600px) and (orientation:portrait){
+  body:has(.v1-opening) #root{min-height:100dvh}
+  .v1-opening{min-height:100dvh}
+  .v1-scene{height:100dvh}
+  .v1-page,.v1-announcement-card,.v1-family-card,.v1-mehendi-card,.v1-haldi-card,.v1-sangeet-card,.v1-wedding-card{width:100vw;height:100dvh;aspect-ratio:auto}
+  .v1-invite-controls{top:calc(env(safe-area-inset-top) + 8px);right:calc(env(safe-area-inset-right) + 8px)}
+}
 @media(prefers-reduced-motion:reduce){.v1-event-map::before,.v1-event-map svg{animation:none!important}.v1-event-map::before{opacity:0}.v1-event-map{transition:none}}
 @media(prefers-reduced-motion:reduce){.v1-continue-hint{transition:none}.v1-gesture-arrows{animation:none!important;transform:none!important;opacity:1}.v1-p2-flower-fall{opacity:1!important;animation:none!important;will-change:auto}.v1-p2-lamp-glow{animation:none!important;filter:none!important;will-change:auto}}
 @media(prefers-reduced-motion:reduce){.v1-sangeet-canopy,.v1-p6-revealed .v1-sangeet-heading h1,.v1-p6-revealed .v1-sangeet-details .v1-event-map::before,.v1-sangeet-taal span,.v1-sangeet-bg-twinkle{animation:none!important}.v1-sangeet-canopy{will-change:auto}.v1-sangeet-taal,.v1-sangeet-background-twinkles{display:none}}
