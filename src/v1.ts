@@ -907,7 +907,11 @@ const sceneObserver=new IntersectionObserver(entries=>{
   const currentScene=scenes[index];
   pageSix?.classList.toggle('v1-p6-live',currentScene===pageSix);
   pageSeven.classList.toggle('v1-p7-live',currentScene===pageSeven);
-  scenes.forEach((scene,sceneIndex)=>scene.setAttribute('aria-hidden',sceneIndex===index||sceneIndex===index+1?'false':'true'));
+  scenes.forEach((scene,sceneIndex)=>{
+    const hidden=sceneIndex!==index&&sceneIndex!==index+1;
+    if(hidden&&scene.contains(document.activeElement)) (document.activeElement as HTMLElement).blur();
+    scene.setAttribute('aria-hidden',hidden?'true':'false');
+  });
   if(index===0)return;
   page.tabIndex=-1;
   if(currentScene===familyPage)revealFamilyPage();
@@ -1019,6 +1023,7 @@ const pageTwoObserver = new IntersectionObserver(entries => {
   nextPage.classList.add('v1-p2-live');
   advancing = false;
   nextPage.setAttribute('aria-hidden','false');
+  if(page.contains(document.activeElement)) (document.activeElement as HTMLElement).blur();
   page.setAttribute('aria-hidden','true');
   page.tabIndex = -1;
   void pageTwoReady.then(() => window.setTimeout(() => {
