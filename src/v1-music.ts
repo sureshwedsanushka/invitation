@@ -21,6 +21,7 @@ export function setupInviteMusic(root:HTMLElement){
     button.title=label;
     button.setAttribute('aria-pressed',String(playing));
     button.dataset.playing=String(playing);
+    button.dataset.enabled=String(!mutedByGuest);
   }
   function stop(){
     mutedByGuest=true;
@@ -56,7 +57,8 @@ export function setupInviteMusic(root:HTMLElement){
     if(mutedByGuest||starting||!audio.paused)return;
     void start();
   };
-  // Touch activation arrives at touchend; capture runs before navigation handlers.
+  // Try at swipe start; touchend and click retry if the browser blocks that attempt.
+  root.addEventListener('touchstart',onGuestTap,{capture:true,passive:true});
   root.addEventListener('touchend',onGuestTap,{capture:true,passive:true});
   root.addEventListener('click',onGuestTap,{capture:true});
   window.addEventListener('pagehide',stop);

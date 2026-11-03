@@ -426,5 +426,5 @@ body:has(.v1-opening) #root{width:100%;min-height:100svh}
 .v1-music-toggle svg{display:block;width:18px;height:18px;filter:drop-shadow(0 1px 1px #30101488)}
 .v1-music-toggle:focus-visible{outline:2px solid #fff1cd;outline-offset:2px}
 .v1-music-toggle .v1-music-waves{display:none}
-.v1-music-toggle[data-playing="true"] .v1-music-waves{display:block}
-.v1-music-toggle[data-playing="true"] .v1-music-slash{display:none}
+.v1-music-toggle[data-enabled="true"] .v1-music-waves{display:block}
+.v1-music-toggle[data-enabled="true"] .v1-music-slash{display:none}
