@@ -28,7 +28,7 @@ root.innerHTML = `<div class="v1-invite-controls">
   <button type="button" data-language="mr" lang="mr" aria-pressed="false">मराठी</button>
 </nav>
 </div>
-<audio class="v1-music-audio" src="${assetUrl('audio/tum-se-hi-sitar.mp3')}" preload="metadata"></audio>
+<audio class="v1-music-audio" src="${assetUrl('audio/tum-se-hi-invitation-loop.mp3')}" preload="metadata"></audio>
 <main class="v1-opening" aria-label="Suresh and Anushka wedding invitation">
   <section class="v1-scene v1-opening-scene" aria-label="Wedding invitation cover">
   <div class="v1-page v1-page-one" role="button" tabindex="0" aria-label="Continue to the wedding announcement after the opening">
