@@ -8,7 +8,7 @@ The GitHub Pages deployment target is <https://sureshwedsanushka.github.io/invit
 | --- | --- | --- |
 | `/v1` | Suresh with Anushka | Wedding only; Mehendi, Haldi, Sangeet and Cocktails omitted |
 | `/VAMHS` | Anushka with Suresh | Mehendi, Haldi, Sangeet and Cocktails, Wedding |
-| `/VAMH` | Anushka with Suresh | Mehendi, Haldi, Wedding |
+| `/VAH` | Anushka with Suresh | Haldi, Wedding |
 | `/VAHS` | Anushka with Suresh | Haldi, Sangeet and Cocktails, Wedding; Mehendi omitted |
 | `/VAS` | Anushka with Suresh | Sangeet and Cocktails, Wedding; Mehendi and Haldi omitted |
 | `/VA` | Anushka with Suresh | Wedding only; Mehendi, Haldi, Sangeet and Cocktails omitted |
@@ -26,7 +26,7 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:5173/v1`, `/VAMHS`, `/VAMH`, `/VAHS`, `/VAS`, `/VA`, `/VSHS`, or `/VSH`. To build the static site into `dist/`, run:
+Open `http://localhost:5173/v1`, `/VAMHS`, `/VAH`, `/VAHS`, `/VAS`, `/VA`, `/VSHS`, or `/VSH`. To build the static site into `dist/`, run:
 
 ```sh
 npm run build
@@ -41,3 +41,5 @@ GitHub Pages builds use `npm run build:pages`, which also creates the fallback p
 - `src/invite-config.ts` contains only route-specific page selections and content overrides, including the `/VSHS` Haldi address.
 - `public/canva-pages.json` supplies the layered page artwork used by the invitation.
 - `public/assets/` contains the shared artwork, fonts, music, and page-specific illustrations.
+
+The former `/VAMH/` URL redirects to `/VAH/` so previously shared links continue to work.

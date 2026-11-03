@@ -58,7 +58,7 @@ const groomInvitation: InvitationConfig = {
 export const invitationConfigs: Readonly<Record<string, InvitationConfig>> = {
   '/v1': { ...groomInvitation, includeHaldi: false, includeSangeet: false },
   '/VAMHS': anushkaInvitation,
-  '/VAMH': { ...anushkaInvitation, includeSangeet: false },
+  '/VAH': { ...anushkaInvitation, includeMehendi: false, includeSangeet: false },
   '/VAHS': { ...anushkaInvitation, includeMehendi: false },
   '/VAS': { ...anushkaInvitation, includeMehendi: false, includeHaldi: false },
   '/VA': { ...anushkaInvitation, includeMehendi: false, includeHaldi: false, includeSangeet: false },
