@@ -238,6 +238,12 @@ let ignoreClickUntil = 0;
 let touchStartX = 0;
 let touchStartY = 0;
 let trackingTouch = false;
+let draggingScene = false;
+let dragOrigin = 0;
+let dragSceneIndex = 0;
+let lastTouchY = 0;
+let lastTouchTime = 0;
+let swipeVelocity = 0;
 let wheelGestureLocked = false;
 let wheelUnlockTimer = 0;
 let resizeAlignmentPending=false;
@@ -800,7 +806,7 @@ function navigateToScene(scene:HTMLElement,onComplete?:()=>void){
     opening.scrollTo({top:sceneOffset(),left:0,behavior:'instant'});
     html.classList.remove('v1-page-transition');
     activeSceneIndex=scenes.indexOf(scene);
-    syncSceneChrome(scene);
+    applySceneState(activeSceneIndex);
     scenes.forEach(candidate=>candidate.classList.toggle('v1-scene-visible',candidate===scene));
     tapLocked=false;
     if(resizeAlignmentPending){
@@ -812,12 +818,13 @@ function navigateToScene(scene:HTMLElement,onComplete?:()=>void){
   if(prefersReduced.matches){finish();return;}
   if(Math.abs(opening.scrollTop-sceneOffset())<1){finish();return;}
   const from=opening.scrollTop;
-  const duration=850;
+  const distance=Math.abs(sceneOffset()-from);
+  const duration=Math.max(180,Math.min(480,480*distance/opening.clientHeight));
   const started=performance.now();
   const glide=(now:number)=>{
     if(finished)return;
     const progress=Math.min(1,(now-started)/duration);
-    const eased=progress<.5?4*progress*progress*progress:1-Math.pow(-2*progress+2,3)/2;
+    const eased=1-Math.pow(1-progress,3);
     opening.scrollTo({top:from+(sceneOffset()-from)*eased,left:0,behavior:'instant'});
     if(progress<1)window.requestAnimationFrame(glide);
     else finish();
@@ -827,10 +834,10 @@ function navigateToScene(scene:HTMLElement,onComplete?:()=>void){
 
 let resizeAlignmentFrame=0;
 function alignActiveSceneAfterResize(){
-  if(tapLocked){resizeAlignmentPending=true;return;}
+  if(tapLocked||trackingTouch){resizeAlignmentPending=true;return;}
   window.cancelAnimationFrame(resizeAlignmentFrame);
   resizeAlignmentFrame=window.requestAnimationFrame(()=>{
-    if(tapLocked){resizeAlignmentPending=true;return;}
+    if(tapLocked||trackingTouch){resizeAlignmentPending=true;return;}
     const activeScene=scenes[activeSceneIndex];
     if(!activeScene)return;
     opening.scrollTo({top:activeScene.getBoundingClientRect().top-opening.getBoundingClientRect().top+opening.scrollTop,left:0,behavior:'instant'});
@@ -863,7 +870,7 @@ function advance() {
   }).catch(error => { advancing=false; console.error('Unable to load page 2 layers',error); });
 }
 function onKey(event: KeyboardEvent){if(event.key==='Enter'||event.key===' '){event.preventDefault();advance();}}
-page.addEventListener('click',advance);
+page.addEventListener('click',()=>{if(Date.now()>=ignoreClickUntil)advance();});
 page.addEventListener('keydown',onKey);
 
 root.addEventListener('click',event=>{
@@ -875,30 +882,54 @@ root.addEventListener('click',event=>{
 });
 
 root.addEventListener('touchstart',event=>{
-  if(event.touches.length!==1)return;
+  if(event.touches.length!==1||tapLocked||advancing||!introFinished)return;
   const target=event.target;
   if(target instanceof Element&&target.closest('a,button,input,select,textarea'))return;
   touchStartX=event.touches[0].clientX;
-  touchStartY=event.touches[0].clientY;
+  touchStartY=lastTouchY=event.touches[0].clientY;
+  lastTouchTime=performance.now();
+  swipeVelocity=0;
+  dragOrigin=opening.scrollTop;
+  dragSceneIndex=activeSceneIndex;
+  draggingScene=false;
   trackingTouch=true;
 },{passive:true});
 root.addEventListener('touchmove',event=>{
   if(!trackingTouch||event.touches.length!==1)return;
-  const dx=event.touches[0].clientX-touchStartX;
-  const dy=event.touches[0].clientY-touchStartY;
-  if(Math.abs(dy)>10&&Math.abs(dy)>Math.abs(dx))event.preventDefault();
-},{passive:false});
-root.addEventListener('touchend',event=>{
-  if(!trackingTouch)return;
-  trackingTouch=false;
-  const touch=event.changedTouches[0];
+  const touch=event.touches[0];
   const dx=touch.clientX-touchStartX;
   const dy=touchStartY-touch.clientY;
-  if(Math.abs(dy)<44||Math.abs(dy)<Math.abs(dx)*1.15)return;
-  ignoreClickUntil=Date.now()+750;
-  navigateByGesture(dy>0?1:-1);
-},{passive:true});
-root.addEventListener('touchcancel',()=>{trackingTouch=false;},{passive:true});
+  if(!draggingScene){
+    if(Math.abs(dy)<8||Math.abs(dy)<Math.abs(dx)*1.15)return;
+    draggingScene=true;
+    document.documentElement.classList.add('v1-page-transition');
+    scenes.forEach((scene,index)=>{if(Math.abs(index-dragSceneIndex)<=1)scene.classList.add('v1-scene-visible');});
+  }
+  event.preventDefault();
+  const now=performance.now();
+  swipeVelocity=(lastTouchY-touch.clientY)/Math.max(1,now-lastTouchTime);
+  lastTouchY=touch.clientY;
+  lastTouchTime=now;
+  const height=opening.clientHeight;
+  const min=dragSceneIndex===0?dragOrigin:dragOrigin-height;
+  const max=dragSceneIndex===scenes.length-1?dragOrigin:dragOrigin+height;
+  opening.scrollTo({top:Math.max(min,Math.min(max,dragOrigin+dy)),left:0,behavior:'instant'});
+},{passive:false});
+function settleTouch(cancelled:boolean){
+  if(!trackingTouch)return;
+  trackingTouch=false;
+  if(!draggingScene){if(resizeAlignmentPending)alignActiveSceneAfterResize();return;}
+  draggingScene=false;
+  ignoreClickUntil=Date.now()+600;
+  const distance=opening.scrollTop-dragOrigin;
+  const velocity=performance.now()-lastTouchTime<100?swipeVelocity:0;
+  const commit=!cancelled&&(Math.abs(distance)>opening.clientHeight*.18||(Math.abs(distance)>18&&Math.abs(velocity)>.45&&Math.sign(velocity)===Math.sign(distance)));
+  const index=Math.max(0,Math.min(scenes.length-1,dragSceneIndex+(commit?(distance>0?1:-1):0)));
+  activeSceneIndex=dragSceneIndex;
+  navigateToScene(scenes[index]);
+}
+root.addEventListener('touchend',()=>settleTouch(false),{passive:true});
+root.addEventListener('touchcancel',()=>settleTouch(true),{passive:true});
 
 root.addEventListener('wheel',event=>{
   event.preventDefault();
@@ -912,12 +943,7 @@ root.addEventListener('wheel',event=>{
   wheelUnlockTimer=window.setTimeout(()=>{wheelGestureLocked=false;},300);
 },{passive:false});
 
-const sceneObserver=new IntersectionObserver(entries=>{
-  const visible=entries.filter(entry=>entry.isIntersecting&&entry.intersectionRatio>=.55)
-    .sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
-  if(!visible)return;
-  const index=scenes.indexOf(visible.target as HTMLElement);
-  if(index<0)return;
+function applySceneState(index:number){
   activeSceneIndex=index;
   const currentScene=scenes[index];
   syncSceneChrome(currentScene);
@@ -935,6 +961,15 @@ const sceneObserver=new IntersectionObserver(entries=>{
   if(currentScene===pageFive)revealHaldiPage();
   if(currentScene===pageSix)revealSangeetPage();
   if(currentScene===pageSeven)revealWeddingPage();
+}
+const sceneObserver=new IntersectionObserver(entries=>{
+  const visible=entries.filter(entry=>entry.isIntersecting&&entry.intersectionRatio>=.55)
+    .sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+  if(!visible)return;
+  const index=scenes.indexOf(visible.target as HTMLElement);
+  if(index<0)return;
+  if(trackingTouch||tapLocked)return;
+  applySceneState(index);
 },{root:opening,threshold:[.55,.78]});
 scenes.forEach(scene=>sceneObserver.observe(scene));
 
