@@ -819,7 +819,7 @@ function navigateToScene(scene:HTMLElement,onComplete?:()=>void){
   if(Math.abs(opening.scrollTop-sceneOffset())<1){finish();return;}
   const from=opening.scrollTop;
   const distance=Math.abs(sceneOffset()-from);
-  const duration=Math.max(180,Math.min(480,480*distance/opening.clientHeight));
+  const duration=Math.max(225,Math.min(600,600*distance/opening.clientHeight));
   const started=performance.now();
   const glide=(now:number)=>{
     if(finished)return;
@@ -913,7 +913,7 @@ root.addEventListener('touchmove',event=>{
   const height=opening.clientHeight;
   const min=dragSceneIndex===0?dragOrigin:dragOrigin-height;
   const max=dragSceneIndex===scenes.length-1?dragOrigin:dragOrigin+height;
-  opening.scrollTo({top:Math.max(min,Math.min(max,dragOrigin+dy)),left:0,behavior:'instant'});
+  opening.scrollTo({top:Math.max(min,Math.min(max,dragOrigin+dy*.8)),left:0,behavior:'instant'});
 },{passive:false});
 function settleTouch(cancelled:boolean){
   if(!trackingTouch)return;
