@@ -42,4 +42,4 @@ GitHub Pages builds use `npm run build:pages`, which also creates the fallback p
 - `public/canva-pages.json` supplies the layered page artwork used by the invitation.
 - `public/assets/` contains the shared artwork, fonts, music, and page-specific illustrations.
 
-The former `/VAMH/` URL redirects to `/VAH/` so previously shared links continue to work.
+`/VAMH/` has been removed. Use `/VAH/` for the bride-side Haldi and Wedding invitation.
