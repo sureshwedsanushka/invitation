@@ -9,15 +9,14 @@ export function setupInviteMusic(root:HTMLElement){
   let language:InviteLanguage='en';
   let mutedByGuest=false;
   let starting=false;
-  let gestureStartPending=false;
-  let playbackStartedByGuest=false;
+  let playbackGeneration=0;
   let startPositionApplied=false;
   let endFadeStarted=false;
   let audioContext:AudioContext|undefined;
   let gainNode:GainNode|undefined;
   let fadeTimer:number|undefined;
   let fadeGeneration=0;
-  audio.volume=0;
+  audio.volume=targetVolume;
   audio.muted=mutedByGuest;
   audio.loop=false;
   function applyStartPosition(){
@@ -40,7 +39,7 @@ export function setupInviteMusic(root:HTMLElement){
       void audioContext?.close();
       audioContext=undefined;
       gainNode=undefined;
-      audio.volume=0;
+      audio.volume=targetVolume;
     }
   }
   function setLevel(level:number){
@@ -90,7 +89,7 @@ export function setupInviteMusic(root:HTMLElement){
   }
   audio.addEventListener('timeupdate',onTimeUpdate);
   function update(){
-    const playing=!audio.muted&&!audio.paused;
+    const playing=!mutedByGuest&&!audio.muted&&!audio.paused&&(!audioContext||audioContext.state==='running');
     const label=language==='mr'
       ?(playing?'संगीत बंद करा':'संगीत सुरू करा')
       :(playing?'Mute music':'Play music');
@@ -99,43 +98,62 @@ export function setupInviteMusic(root:HTMLElement){
     button.setAttribute('aria-pressed',String(playing));
     button.dataset.playing=String(playing);
   }
-  async function start(fromGesture=false){
-    if(starting&&!fromGesture)return;
+  function stop(){
+    mutedByGuest=true;
+    playbackGeneration++;
+    starting=false;
+    fadeGeneration++;
+    if(fadeTimer!==undefined)window.clearTimeout(fadeTimer);
+    fadeTimer=undefined;
+    setLevel(0);
+    audio.muted=true;
+    audio.pause();
+    update();
+  }
+  async function start(){
+    if(starting)return;
     starting=true;
-    const wasPaused=audio.paused;
+    const generation=++playbackGeneration;
+    mutedByGuest=false;
+    audio.muted=false;
     try {
       applyStartPosition();
       initializeAudioOutput();
-      const resumeAudio=audioContext?.state==='suspended'?audioContext.resume():Promise.resolve();
+      // Both calls must happen synchronously inside the trusted gesture.
+      const resumeAudio=audioContext&&audioContext.state!=='running'
+        ?audioContext.resume():Promise.resolve();
       const playAudio=audio.play();
       await Promise.all([resumeAudio,playAudio]);
-      if(wasPaused)fadeTo(targetVolume,fadeSeconds);
-    } catch { /* Retry after a guest gesture if autoplay was blocked. */ }
-    finally { starting=false;update(); }
+      if(generation!==playbackGeneration||mutedByGuest)return;
+      endFadeStarted=false;
+      fadeTo(targetVolume,Math.min(fadeSeconds,Math.max(.1,loopAtSeconds-audio.currentTime)));
+    } catch {
+      if(generation===playbackGeneration){
+        audio.pause();
+        setLevel(0);
+      }
+      // Keep the control available for the next trusted gesture.
+    } finally {
+      if(generation===playbackGeneration)starting=false;
+      update();
+    }
   }
   button.addEventListener('click',()=>{
-    if(!audio.muted&&!audio.paused){
-      mutedByGuest=true;
-      audio.muted=true;
-    }else{
-      mutedByGuest=false;
-      audio.muted=false;
-      void start(true);
-    }
-    update();
+    if(starting||(!mutedByGuest&&!audio.paused&&(!audioContext||audioContext.state==='running'))){
+      stop();
+    }else void start();
   });
-  // Start playback at the first touch or click, before navigation handlers run.
   const onGuestTap=(event:Event)=>{
     if(event.target instanceof Element&&event.target.closest('.v1-music-toggle,a,input,select,textarea'))return;
-    if(mutedByGuest||gestureStartPending||playbackStartedByGuest)return;
-    gestureStartPending=true;
-    void start(true).finally(()=>{
-      gestureStartPending=false;
-      if(!audio.paused)playbackStartedByGuest=true;
-    });
+    if(mutedByGuest||starting)return;
+    if(!audio.paused&&(!audioContext||audioContext.state==='running'))return;
+    void start();
   };
-  root.addEventListener('pointerdown',onGuestTap,{capture:true});
-  root.addEventListener('click',onGuestTap);
+  // Touch activation is granted on touchend, not on touch pointerdown.
+  // Capture also covers swipes whose navigation handler prevents a click.
+  root.addEventListener('touchend',onGuestTap,{capture:true,passive:true});
+  root.addEventListener('click',onGuestTap,{capture:true});
+  window.addEventListener('pagehide',stop);
   for(const event of ['playing','pause','volumechange','ended'])audio.addEventListener(event,update);
   update();
   return {setLanguage(next:InviteLanguage){language=next;update();}};
