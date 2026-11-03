@@ -28,7 +28,7 @@ root.innerHTML = `<div class="v1-invite-controls">
   <button type="button" data-language="mr" lang="mr" aria-pressed="false">मराठी</button>
 </nav>
 </div>
-<audio class="v1-music-audio" src="${assetUrl('audio/vaaroon-forever.mp3')}" loop preload="auto"></audio>
+<audio class="v1-music-audio" src="${assetUrl('audio/tum-se-hi-sitar.mp3')}" preload="metadata"></audio>
 <main class="v1-opening" aria-label="Suresh and Anushka wedding invitation">
   <section class="v1-scene v1-opening-scene" aria-label="Wedding invitation cover">
   <div class="v1-page v1-page-one" role="button" tabindex="0" aria-label="Continue to the wedding announcement after the opening">
@@ -232,6 +232,7 @@ let touchStartY = 0;
 let trackingTouch = false;
 let wheelGestureLocked = false;
 let wheelUnlockTimer = 0;
+let resizeAlignmentPending=false;
 
 const pageTwoReady = (async () => {
   const pages = await fetch(assetUrl('canva-pages.json')).then(response => response.json());
@@ -783,28 +784,32 @@ function navigateToScene(scene:HTMLElement,onComplete?:()=>void){
   scene.classList.add('v1-scene-visible');
   const html=document.documentElement;
   html.classList.add('v1-page-transition');
-  const sceneOffset=()=>scene.getBoundingClientRect().top+window.scrollY;
+  const sceneOffset=()=>scene.getBoundingClientRect().top-opening.getBoundingClientRect().top+opening.scrollTop;
   let finished=false;
   const finish=()=>{
     if(finished)return;
     finished=true;
-    window.scrollTo({top:sceneOffset(),left:0,behavior:'instant'});
+    opening.scrollTo({top:sceneOffset(),left:0,behavior:'instant'});
     html.classList.remove('v1-page-transition');
     activeSceneIndex=scenes.indexOf(scene);
     scenes.forEach(candidate=>candidate.classList.toggle('v1-scene-visible',candidate===scene));
     tapLocked=false;
+    if(resizeAlignmentPending){
+      resizeAlignmentPending=false;
+      alignActiveSceneAfterResize();
+    }
     onComplete?.();
   };
   if(prefersReduced.matches){finish();return;}
-  if(Math.abs(window.scrollY-sceneOffset())<1){finish();return;}
-  const from=window.scrollY;
+  if(Math.abs(opening.scrollTop-sceneOffset())<1){finish();return;}
+  const from=opening.scrollTop;
   const duration=850;
   const started=performance.now();
   const glide=(now:number)=>{
     if(finished)return;
     const progress=Math.min(1,(now-started)/duration);
     const eased=progress<.5?4*progress*progress*progress:1-Math.pow(-2*progress+2,3)/2;
-    window.scrollTo({top:from+(sceneOffset()-from)*eased,left:0,behavior:'instant'});
+    opening.scrollTo({top:from+(sceneOffset()-from)*eased,left:0,behavior:'instant'});
     if(progress<1)window.requestAnimationFrame(glide);
     else finish();
   };
@@ -813,12 +818,13 @@ function navigateToScene(scene:HTMLElement,onComplete?:()=>void){
 
 let resizeAlignmentFrame=0;
 function alignActiveSceneAfterResize(){
-  if(tapLocked)return;
+  if(tapLocked){resizeAlignmentPending=true;return;}
   window.cancelAnimationFrame(resizeAlignmentFrame);
   resizeAlignmentFrame=window.requestAnimationFrame(()=>{
+    if(tapLocked){resizeAlignmentPending=true;return;}
     const activeScene=scenes[activeSceneIndex];
     if(!activeScene)return;
-    window.scrollTo({top:activeScene.getBoundingClientRect().top+window.scrollY,left:0,behavior:'instant'});
+    opening.scrollTo({top:activeScene.getBoundingClientRect().top-opening.getBoundingClientRect().top+opening.scrollTop,left:0,behavior:'instant'});
   });
 }
 window.addEventListener('resize',alignActiveSceneAfterResize,{passive:true});
@@ -919,7 +925,7 @@ const sceneObserver=new IntersectionObserver(entries=>{
   if(currentScene===pageFive)revealHaldiPage();
   if(currentScene===pageSix)revealSangeetPage();
   if(currentScene===pageSeven)revealWeddingPage();
-},{threshold:[.55,.78]});
+},{root:opening,threshold:[.55,.78]});
 scenes.forEach(scene=>sceneObserver.observe(scene));
 
 let familyRevealStarted=false;

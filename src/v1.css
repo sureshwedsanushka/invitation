@@ -9,7 +9,7 @@
 @font-face{font-family:Amita;src:url('../assets/Amita-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:block}
 html:has(.v1-opening){scroll-snap-type:y mandatory;scroll-padding-block:0;scroll-behavior:auto}
 html.v1-page-transition:has(.v1-opening){scroll-snap-type:none}
-html:has(.v1-opening),body:has(.v1-opening){margin:0;padding:0;background:#28120e;overscroll-behavior-y:contain;touch-action:pan-x}
+html:has(.v1-opening),body:has(.v1-opening){width:100%;height:100%;margin:0;padding:0;overflow:hidden;background:#28120e;overscroll-behavior:none;touch-action:pan-x}
 body:has(.v1-opening:not(.v1-ready)){overflow:hidden}
 body:has(.v1-opening) #root{width:100%;min-height:100svh}
 /* Use the same responsive dimensions as the invitation cards to stay inside the frame. */
@@ -22,8 +22,8 @@ body:has(.v1-opening) #root{width:100%;min-height:100svh}
 .v1-language-toggle button[lang="mr"]{font-family:'Tiro Devanagari Hindi','Kohinoor Devanagari',serif}
 .v1-language-toggle button[aria-pressed="true"]{background:#f0d09b33;color:#fff3d7;box-shadow:inset 0 0 0 1px #d9b86a99}
 .v1-language-toggle button:focus-visible{outline:2px solid #fff1cd;outline-offset:2px}
-.v1-opening{position:relative;width:100%;min-height:100svh;display:block;overflow:visible;background:#28120e}
-.v1-scene{position:relative;width:100%;height:100vh;height:100svh;display:grid;place-items:center;overflow:hidden;scroll-snap-align:start;scroll-snap-stop:always}
+.v1-opening{position:fixed;inset:0;width:100%;height:100vh;height:100dvh;min-height:0;display:block;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;background:#28120e}
+.v1-scene{position:relative;width:100%;height:100%;display:grid;place-items:center;overflow:hidden;scroll-snap-align:start;scroll-snap-stop:always}
 .v1-scene:not(.v1-scene-visible){visibility:hidden}
 .v1-opening-scene{background:#28120e}
 .v1-announcement-scene{background:#f9c9ad}
@@ -326,10 +326,12 @@ body:has(.v1-opening) #root{width:100%;min-height:100svh}
 .v1-wedding-petal{position:absolute;top:-4cqw;width:2.1cqw;height:3.5cqw;min-width:7px;min-height:12px;max-width:12px;max-height:20px;border-radius:82% 16% 76% 24%;background:linear-gradient(145deg,#f4c1b2 0%,#d87579 34%,#ae3d4b 70%,#76232e 100%);box-shadow:inset .35px .4px .5px #ffe2ce99,0 1px 3px #25070a55;opacity:0;transform-origin:50% 54%;animation:v1-wedding-petal-fall var(--fall-duration,14s) var(--fall-delay,0s) linear infinite;animation-play-state:paused;will-change:transform,opacity}
 .v1-wedding-petal::after{content:'';position:absolute;left:45%;top:13%;width:1px;height:67%;border-radius:50%;background:linear-gradient(180deg,#ffead388,#e9a09a18);transform:rotate(-13deg)}
 @media(max-width:600px){.v1-mehendi-card,.v1-haldi-card,.v1-sangeet-card,.v1-wedding-card{width:min(100vw,56.25svh,540px)}}
+/* The pager drives movement itself; native snapping can fight iOS WebKit's changing viewport. */
+@media(max-width:600px){html:has(.v1-opening){scroll-snap-type:none}html:has(.v1-opening),body:has(.v1-opening){overscroll-behavior-y:none}}
 /* On portrait phones, let each invitation page use the full visible screen. */
 @media(max-width:600px) and (orientation:portrait){
   body:has(.v1-opening) #root{min-height:100dvh}
-  .v1-opening{min-height:100dvh}
+  .v1-opening{height:100dvh;min-height:0}
   .v1-scene{height:100dvh}
   .v1-page,.v1-announcement-card,.v1-family-card,.v1-mehendi-card,.v1-haldi-card,.v1-sangeet-card,.v1-wedding-card{width:100vw;height:100dvh;aspect-ratio:auto}
   .v1-invite-controls{top:calc(env(safe-area-inset-top) + 8px);right:calc(env(safe-area-inset-right) + 8px)}

@@ -3,24 +3,94 @@ import type { InviteLanguage } from './v1-language';
 export function setupInviteMusic(root:HTMLElement){
   const audio=root.querySelector<HTMLAudioElement>('.v1-music-audio')!;
   const button=root.querySelector<HTMLButtonElement>('.v1-music-toggle')!;
-  const startAtSeconds=10;
+  const loopAtSeconds=94;
+  const fadeSeconds=4;
+  const targetVolume=.24;
   let language:InviteLanguage='en';
   let mutedByGuest=false;
   let starting=false;
   let gestureStartPending=false;
   let playbackStartedByGuest=false;
   let startPositionApplied=false;
-  audio.volume=.24;
+  let endFadeStarted=false;
+  let audioContext:AudioContext|undefined;
+  let gainNode:GainNode|undefined;
+  let fadeTimer:number|undefined;
+  let fadeGeneration=0;
+  audio.volume=0;
   audio.muted=mutedByGuest;
+  audio.loop=false;
   function applyStartPosition(){
     if(startPositionApplied||audio.readyState<HTMLMediaElement.HAVE_METADATA)return;
-    const lastPlayableSecond=Number.isFinite(audio.duration)?Math.max(0,audio.duration-.05):startAtSeconds;
-    audio.currentTime=Math.min(startAtSeconds,lastPlayableSecond);
+    audio.currentTime=0;
     startPositionApplied=true;
   }
   audio.addEventListener('loadedmetadata',applyStartPosition,{once:true});
+  function initializeAudioOutput(){
+    if(gainNode||!window.AudioContext)return;
+    try{
+      audioContext=new AudioContext();
+      const source=audioContext.createMediaElementSource(audio);
+      gainNode=audioContext.createGain();
+      gainNode.gain.setValueAtTime(0,audioContext.currentTime);
+      source.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      audio.volume=1;
+    }catch{
+      void audioContext?.close();
+      audioContext=undefined;
+      gainNode=undefined;
+      audio.volume=0;
+    }
+  }
+  function setLevel(level:number){
+    if(gainNode&&audioContext){
+      const now=audioContext.currentTime;
+      gainNode.gain.cancelScheduledValues(now);
+      gainNode.gain.setValueAtTime(level,now);
+    }else audio.volume=level;
+  }
+  function fadeTo(level:number,durationSeconds:number){
+    if(fadeTimer!==undefined)window.clearTimeout(fadeTimer);
+    fadeTimer=undefined;
+    const generation=++fadeGeneration;
+    if(gainNode&&audioContext?.state==='running'){
+      const now=audioContext.currentTime;
+      const gain=gainNode.gain;
+      const startLevel=gain.value;
+      gain.cancelScheduledValues(now);
+      gain.setValueAtTime(startLevel,now);
+      gain.linearRampToValueAtTime(level,now+durationSeconds);
+      return;
+    }
+    const startLevel=audio.volume;
+    const startedAt=performance.now();
+    const step=()=>{
+      if(generation!==fadeGeneration)return;
+      const progress=Math.min(1,(performance.now()-startedAt)/(durationSeconds*1000));
+      audio.volume=startLevel+(level-startLevel)*progress;
+      if(progress<1)fadeTimer=window.setTimeout(step,40);
+      else fadeTimer=undefined;
+    };
+    step();
+  }
+  function onTimeUpdate(){
+    if(audio.paused)return;
+    if(audio.currentTime>=loopAtSeconds){
+      endFadeStarted=false;
+      setLevel(0);
+      audio.currentTime=0;
+      fadeTo(targetVolume,fadeSeconds);
+      return;
+    }
+    if(!endFadeStarted&&audio.currentTime>=loopAtSeconds-fadeSeconds){
+      endFadeStarted=true;
+      fadeTo(0,fadeSeconds);
+    }
+  }
+  audio.addEventListener('timeupdate',onTimeUpdate);
   function update(){
-    const playing=!audio.muted;
+    const playing=!audio.muted&&!audio.paused;
     const label=language==='mr'
       ?(playing?'संगीत बंद करा':'संगीत सुरू करा')
       :(playing?'Mute music':'Play music');
@@ -32,7 +102,15 @@ export function setupInviteMusic(root:HTMLElement){
   async function start(fromGesture=false){
     if(starting&&!fromGesture)return;
     starting=true;
-    try { applyStartPosition(); await audio.play(); } catch { /* Retry after a guest gesture if autoplay was blocked. */ }
+    const wasPaused=audio.paused;
+    try {
+      applyStartPosition();
+      initializeAudioOutput();
+      const resumeAudio=audioContext?.state==='suspended'?audioContext.resume():Promise.resolve();
+      const playAudio=audio.play();
+      await Promise.all([resumeAudio,playAudio]);
+      if(wasPaused)fadeTo(targetVolume,fadeSeconds);
+    } catch { /* Retry after a guest gesture if autoplay was blocked. */ }
     finally { starting=false;update(); }
   }
   button.addEventListener('click',()=>{
