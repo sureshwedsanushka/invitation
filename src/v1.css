@@ -9,7 +9,7 @@
 @font-face{font-family:Amita;src:url('../assets/Amita-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:block}
 html:has(.v1-opening){scroll-snap-type:y mandatory;scroll-padding-block:0;scroll-behavior:auto}
 html.v1-page-transition:has(.v1-opening){scroll-snap-type:none}
-html:has(.v1-opening),body:has(.v1-opening){width:100%;height:100%;margin:0;padding:0;overflow:hidden;background:#28120e;overscroll-behavior:none;touch-action:pan-x}
+html:has(.v1-opening),body:has(.v1-opening){width:100%;height:100%;margin:0;padding:0;overflow:hidden;background:var(--invite-frame-color,#740d10);overscroll-behavior:none;touch-action:pan-x}
 body:has(.v1-opening:not(.v1-ready)){overflow:hidden}
 body:has(.v1-opening) #root{width:100%;min-height:100svh}
 /* Use the same responsive dimensions as the invitation cards to stay inside the frame. */
@@ -22,10 +22,10 @@ body:has(.v1-opening) #root{width:100%;min-height:100svh}
 .v1-language-toggle button[lang="mr"]{font-family:'Tiro Devanagari Hindi','Kohinoor Devanagari',serif}
 .v1-language-toggle button[aria-pressed="true"]{background:#f0d09b33;color:#fff3d7;box-shadow:inset 0 0 0 1px #d9b86a99}
 .v1-language-toggle button:focus-visible{outline:2px solid #fff1cd;outline-offset:2px}
-.v1-opening{position:fixed;inset:0;width:100%;height:100vh;height:100dvh;min-height:0;display:block;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;background:#28120e}
+.v1-opening{position:fixed;inset:0;width:100%;height:100vh;height:100dvh;min-height:0;display:block;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;background:var(--invite-frame-color,#740d10)}
 .v1-scene{position:relative;width:100%;height:100%;display:grid;place-items:center;overflow:hidden;scroll-snap-align:start;scroll-snap-stop:always}
 .v1-scene:not(.v1-scene-visible){visibility:hidden}
-.v1-opening-scene{background:#28120e}
+.v1-opening-scene{background:var(--invite-frame-color,#740d10)}
 .v1-announcement-scene{background:#f9c9ad}
 .v1-family-scene{background:#f9c9ad}
 .v1-page{position:relative;z-index:1;isolation:isolate;width:min(100vw,56.25svh,540px);aspect-ratio:9/16;background:#740d10;overflow:hidden;touch-action:pan-x;cursor:pointer;outline:none}
@@ -118,7 +118,7 @@ body:has(.v1-opening) #root{width:100%;min-height:100svh}
 .v1-family-copy[lang="mr"] [data-layer="WITH YOUR BLESSINGS, WE BEGIN"]{top:66.9%!important;height:5.2%!important;font-size:calc(3.25cqw + 1pt)!important;line-height:1.455}
 .v1-family-copy[lang="mr"]+.v1-family-ornament{top:62.5%!important}
 .v1-family-ornament{position:absolute;z-index:6;left:31%;top:62.8%;width:38%;height:3.5%;display:flex;align-items:center;justify-content:center;color:#927138;font-family:Georgia,serif;font-size:3.1cqw;line-height:1}
-.v1-mehendi-scene,.v1-haldi-scene,.v1-sangeet-scene,.v1-wedding-scene{background:#28120e}
+.v1-mehendi-scene,.v1-haldi-scene,.v1-sangeet-scene,.v1-wedding-scene{background:var(--invite-frame-color,#740d10)}
 .v1-mehendi-card,.v1-haldi-card,.v1-sangeet-card,.v1-wedding-card{position:relative;isolation:isolate;width:min(100vw,56.25svh,540px);aspect-ratio:9/16;container-type:inline-size;overflow:hidden}
 .v1-mehendi-card,.v1-sangeet-card,.v1-wedding-card{background:#740d10;color:#f7e8c7}
 .v1-haldi-card{background:#f9c9ad;color:#702818}
@@ -332,8 +332,8 @@ body:has(.v1-opening) #root{width:100%;min-height:100svh}
 @media(max-width:600px) and (orientation:portrait){
   body:has(.v1-opening) #root{min-height:100dvh}
   .v1-opening{height:100dvh;min-height:0}
-  .v1-scene{height:100dvh}
-  .v1-page,.v1-announcement-card,.v1-family-card,.v1-mehendi-card,.v1-haldi-card,.v1-sangeet-card,.v1-wedding-card{width:100vw;height:100dvh;aspect-ratio:auto}
+  .v1-scene{height:100dvh;box-sizing:border-box;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+  .v1-page,.v1-announcement-card,.v1-family-card,.v1-mehendi-card,.v1-haldi-card,.v1-sangeet-card,.v1-wedding-card{width:100%;height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom));aspect-ratio:auto}
   .v1-invite-controls{top:calc(env(safe-area-inset-top) + 8px);right:calc(env(safe-area-inset-right) + 8px)}
 }
 @media(prefers-reduced-motion:reduce){.v1-event-map::before,.v1-event-map svg{animation:none!important}.v1-event-map::before{opacity:0}.v1-event-map{transition:none}}

@@ -23,16 +23,19 @@ export function setupInviteMusic(root:HTMLElement){
     button.dataset.playing=String(playing);
     button.dataset.enabled=String(!mutedByGuest);
   }
-  function stop(){
-    mutedByGuest=true;
+  function suspend(){
     playbackGeneration++;
     starting=false;
     audio.muted=true;
     audio.pause();
     update();
   }
+  function stop(){
+    mutedByGuest=true;
+    suspend();
+  }
   async function start(){
-    if(starting)return;
+    if(starting||document.hidden)return;
     starting=true;
     const generation=++playbackGeneration;
     mutedByGuest=false;
@@ -40,6 +43,7 @@ export function setupInviteMusic(root:HTMLElement){
     try {
       // Invoke play before any await, directly inside the trusted gesture.
       await audio.play();
+      if(document.hidden)suspend();
     } catch {
       if(generation===playbackGeneration)audio.pause();
       // A blocked attempt leaves the control ready for another trusted gesture.
@@ -61,7 +65,11 @@ export function setupInviteMusic(root:HTMLElement){
   root.addEventListener('touchstart',onGuestTap,{capture:true,passive:true});
   root.addEventListener('touchend',onGuestTap,{capture:true,passive:true});
   root.addEventListener('click',onGuestTap,{capture:true});
-  window.addEventListener('pagehide',stop);
+  // Backgrounding must pause native media, without changing the guest mute choice.
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)suspend();});
+  window.addEventListener('pagehide',suspend);
+  document.addEventListener('freeze',suspend);
+  audio.addEventListener('playing',()=>{if(document.hidden)suspend();});
   for(const event of ['playing','pause','volumechange','ended'])audio.addEventListener(event,update);
   update();
   return {setLanguage(next:InviteLanguage){language=next;update();}};

@@ -222,6 +222,14 @@ const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)');
 const scenes = Array.from(root.querySelectorAll<HTMLElement>('.v1-scene'));
 scenes.forEach((scene,index)=>scene.classList.toggle('v1-scene-visible',index===0));
 let activeSceneIndex = 0;
+function syncSceneChrome(scene:HTMLElement){
+  const peach=scene.matches('.v1-announcement-scene,.v1-family-scene,.v1-haldi-scene');
+  const color=peach?'#f9c9ad':'#740d10';
+  document.documentElement.style.setProperty('--invite-frame-color',color);
+  document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')?.setAttribute('content',color);
+}
+syncSceneChrome(scenes[0]);
+
 let tapLocked = false;
 let timeline: gsap.core.Timeline | undefined;
 let introFinished = false;
@@ -792,6 +800,7 @@ function navigateToScene(scene:HTMLElement,onComplete?:()=>void){
     opening.scrollTo({top:sceneOffset(),left:0,behavior:'instant'});
     html.classList.remove('v1-page-transition');
     activeSceneIndex=scenes.indexOf(scene);
+    syncSceneChrome(scene);
     scenes.forEach(candidate=>candidate.classList.toggle('v1-scene-visible',candidate===scene));
     tapLocked=false;
     if(resizeAlignmentPending){
@@ -911,6 +920,7 @@ const sceneObserver=new IntersectionObserver(entries=>{
   if(index<0)return;
   activeSceneIndex=index;
   const currentScene=scenes[index];
+  syncSceneChrome(currentScene);
   pageSix?.classList.toggle('v1-p6-live',currentScene===pageSix);
   pageSeven.classList.toggle('v1-p7-live',currentScene===pageSeven);
   scenes.forEach((scene,sceneIndex)=>{
