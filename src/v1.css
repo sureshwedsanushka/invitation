@@ -345,6 +345,9 @@ body:has(.v1-opening) #root{width:100%;min-height:100svh}
 @media(prefers-reduced-motion:reduce){.v1-mehendi-henna{opacity:1!important}.v1-mehendi-henna path{stroke-dashoffset:0!important}}
 @media(prefers-reduced-motion:reduce){.v1-p5-sway,.v1-p5-breeze,.v1-p5-lantern-glow,.v1-p5-petal{animation:none!important}.v1-p5-petal{display:none}.v1-p5-garland-drop{transform:none!important}}
 
+/* Use the standard Devanagari numeral shapes consistently in Marathi dates and addresses. */
+.v1-opening[lang="mr"] .v1-marathi-digits{font-family:'Kohinoor Devanagari','Noto Sans Devanagari','Devanagari MT',sans-serif;font-weight:inherit;font-style:normal;font-synthesis:none;letter-spacing:0}
+
 /* Marathi shaping needs generous line height, with no Latin tracking or script fonts. */
 .v1-opening[lang="mr"] .v1-event-details,
 .v1-opening[lang="mr"] .v1-event-day,
