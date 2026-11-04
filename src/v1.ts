@@ -12,6 +12,7 @@ const invitePath = (location.pathname.startsWith(basePath)
   ? location.pathname.slice(basePath.length)
   : location.pathname).replace(/\/+$/, '') || '/';
 const invitation = invitationConfigs[invitePath] ?? invitationConfigs['/v1'];
+root.dataset.invitePath=invitePath;
 // Start every fresh load at the cover so its intro sequence is visible on refresh.
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 window.scrollTo({top:0,left:0,behavior:'instant'});

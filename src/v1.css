@@ -209,6 +209,9 @@ body:has(.v1-opening) #root{width:100%;min-height:100svh}
 .v1-opening[lang="en"] .v1-haldi-details .v1-event-venue-label{font-weight:600}
 .v1-haldi-details .v1-event-venue-name{margin-bottom:.5cqw}
 .v1-haldi-details .v1-event-venue-label{color:#855600}
+#root:is([data-invite-path="/VSHS"],[data-invite-path="/VSH"]) .v1-opening[lang="en"] .v1-haldi-details .v1-event-venue-label{font-size:calc(2.61cqw + 2.7pt)}
+#root:is([data-invite-path="/VSHS"],[data-invite-path="/VSH"]) .v1-opening[lang="en"] .v1-haldi-details .v1-event-venue-name{font-size:calc(3.06cqw + 2.7pt)}
+#root:is([data-invite-path="/VSHS"],[data-invite-path="/VSH"]) .v1-opening[lang="en"] .v1-haldi-details .v1-event-address{font-size:calc(2.52cqw + 2.7pt)}
 .v1-haldi-details .v1-event-divider{width:28%;margin:1.8cqw auto .5cqw;color:#855600}
 .v1-haldi-details .v1-event-divider span{opacity:.9}
 .v1-haldi-details .v1-event-map{width:min(9.4cqw,34px);height:min(9.4cqw,34px);min-width:min(9.4cqw,34px);min-height:min(9.4cqw,34px);margin-top:.4cqw}
