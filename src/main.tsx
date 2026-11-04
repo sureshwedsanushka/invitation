@@ -13,13 +13,8 @@ if (canonicalInvitePath) {
   if (invitePath !== canonicalInvitePath) {
     history.replaceState(null, '', `${basePath}${canonicalInvitePath}${location.search}${location.hash}`);
   }
-} else if (invitePath === '/') {
+} else {
   history.replaceState(null, '', `${basePath}/v1${location.search}${location.hash}`);
 }
 
-if (canonicalInvitePath || invitePath === '/') {
-  void import('./v1');
-} else {
-  document.title = 'Invitation not found';
-  document.getElementById('root')!.innerHTML = '<main><h1>Invitation not found</h1><p>Please check the invitation link you received.</p></main>';
-}
+void import('./v1');
