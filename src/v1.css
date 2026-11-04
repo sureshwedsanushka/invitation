@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Gotu&display=swap');
 @font-face{font-family:AmoresaAged;src:url('../assets/amoresa-aged.otf') format('opentype');font-display:swap}
 @font-face{font-family:GreatVibes;src:url('../assets/great-vibes-latin-400-normal.woff2') format('woff2');font-display:swap}
+@font-face{font-family:Montserrat;src:url('../assets/montserrat-latin-400-normal.woff2') format('woff2');font-weight:400;font-display:swap}
 @font-face{font-family:Montserrat;src:url('../assets/montserrat-latin-600-normal.woff2') format('woff2');font-weight:600;font-display:swap}
 @font-face{font-family:Pinyon;src:url('../assets/PinyonScript-Regular.ttf') format('truetype');font-display:swap}
 @font-face{font-family:Parisienne;src:url('../assets/Parisienne-Regular.ttf') format('truetype');font-display:swap}
@@ -204,6 +205,8 @@ body:has(.v1-opening) #root{width:100%;min-height:100svh}
 .v1-haldi-details .v1-event-schedule,.v1-haldi-details .v1-event-venue{width:100%}
 .v1-haldi-details .v1-event-date{margin-top:2.5cqw}
 .v1-haldi-details .v1-event-venue{margin-top:7.2cqw}
+.v1-opening[lang="en"] .v1-haldi-details .v1-event-venue{font-family:Montserrat,Arial,sans-serif}
+.v1-opening[lang="en"] .v1-haldi-details .v1-event-venue-label{font-weight:600}
 .v1-haldi-details .v1-event-venue-name{margin-bottom:.5cqw}
 .v1-haldi-details .v1-event-venue-label{color:#855600}
 .v1-haldi-details .v1-event-divider{width:28%;margin:1.8cqw auto .5cqw;color:#855600}
