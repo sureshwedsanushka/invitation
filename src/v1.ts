@@ -656,7 +656,7 @@ const pageFourReady=(async()=>{
   appendArtwork(art,mehendiLayers(data).filter(layer=>!['gold-divider','map-pin'].includes(layer.label)),'v1-p4-art');
   addMehendiHennaDrawing(art);
   addEventDetails(pageFour.querySelector<HTMLElement>('.v1-mehendi-details')!,{
-    top:'33.7%',weekday:'THURSDAY',month:'DEC',day:'17',year:'2026',time:'12:00 PM ONWARDS',
+    top:'33.7%',weekday:'THURSDAY',month:'DEC',day:'17',year:'2026',time:'4:00 PM ONWARDS',
     venue:'401 Ram Chs',address:['Maruti Nagar, Ashokvan','Dahisar East, Mumbai - 400068'],mapUrl:'https://maps.app.goo.gl/KEqnMNEmWQvNAJam9?g_st=iw',
   });
 })();
@@ -670,7 +670,7 @@ const pageFiveReady=(async()=>{
   addHaldiFallingPetals(haldiArt);
   const details=pageFive.querySelector<HTMLElement>('.v1-haldi-details')!;
   addEventDetails(details,{
-    top:'27%',weekday:'THURSDAY',month:'DEC',day:'17',year:'2026',time:invitation.haldiTime ?? '12:00 PM',venue:'Gokulanand Hotel',
+    top:'27%',weekday:'THURSDAY',month:'DEC',day:'17',year:'2026',time:'6:00 PM',venue:'Gokulanand Hotel',
     address:['Shankheshwar Nagar, Borivali','Mumbai - 400068'],mapUrl:'https://maps.google.com/maps?vet=10CAAQoqAOahcKEwiIi-mV_sKXAxUAAAAAHQAAAAAQBg..i&rlz=1C5OZZY_enAU1196AU1196&sca_esv=3f5bbf6b2af2913f&udm&fvr=1&pvq=CgwvZy8xamt5bTJjMTciFgoQZ29rdWxhbmFuZCBob3RlbBACGAM&lqi=ChBnb2t1bGFuYW5kIGhvdGVsSKfYxNnHkICACFoaEAAQARgAGAEiEGdva3VsYW5hbmQgaG90ZWySAQhidXNfc3RvcA&cs=0&um=1&ie=UTF-8&fb=1&gl=au&sa=X&ftid=0x3be7b0c2bd265787:0x5cbfe49639cad99c',peach:true,haldi:true,
     ...invitation.haldiLocation,
   });
@@ -872,12 +872,13 @@ function navigateToScene(scene:HTMLElement,onComplete?:()=>void){
   };
   if(prefersReduced.matches){finish();return;}
   if(Math.abs(from-destination)<1){finish();return;}
-  const duration=850;
+  const duration=1100;
   const started=performance.now();
   const glide=(now:number)=>{
     if(finished)return;
     const progress=Math.min(1,(now-started)/duration);
-    const eased=progress<.5?4*progress*progress*progress:1-Math.pow(-2*progress+2,3)/2;
+    // A gentle sine curve avoids the previous sharp burst of speed mid-swipe.
+    const eased=(1-Math.cos(Math.PI*progress))/2;
     opening.scrollTo({top:from+(destination-from)*eased,left:0,behavior:'instant'});
     if(progress<1)window.requestAnimationFrame(glide);
     else finish();
