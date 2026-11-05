@@ -12,6 +12,7 @@ type InvitationConfig = {
   familyCopy: Readonly<Record<string, string>>;
   announcementCopy?: Readonly<Record<string, string>>;
   haldiLocation?: InvitationLocation;
+  haldiTime?: string;
 };
 
 const standardInvitation: InvitationConfig = {
@@ -35,6 +36,7 @@ const groomInvitation: InvitationConfig = {
   ...standardInvitation,
   includeMehendi: false,
   includeHaldi: true,
+  haldiTime: '6:00 PM',
   familyCopy: {
     'Mrs. Shweta & Mr. Abhay Subhedar': 'Mrs. Sailee & Mr. Chandrakant Bhandari',
     'cordially invite you\nto celebrate the wedding of their daughter': 'cordially invite you\nto celebrate the wedding of their son',
