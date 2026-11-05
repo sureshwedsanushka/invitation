@@ -198,6 +198,25 @@ function applyInviteLanguage(){
   for(const schedule of root.querySelectorAll<HTMLElement>('.v1-event-schedule')){
     schedule.setAttribute('aria-label',Array.from(schedule.querySelectorAll<HTMLElement>('[data-i18n]')).map(e=>e.textContent).join(' '));
   }
+  // Keep the groom-side Marathi address as before while arranging the English
+  // court and Mumbai postcode together on the final Haldi address line.
+  if(invitePath==='/VSHS'||invitePath==='/VSH'){
+    const address=root.querySelector<HTMLElement>('.v1-haldi-details .v1-event-address');
+    if(address){
+      const lines=inviteLanguage==='mr'?invitation.haldiLocation!.address:[
+        'G-704, A.M Residency',
+        '35 Nesbit Road, Opp Mazagaon',
+        'court, Mumbai - 400010',
+      ];
+      address.replaceChildren();
+      lines.forEach((line,index)=>{
+        if(index)address.append(document.createElement('br'));
+        const part=document.createElement('span');
+        bindTranslation(part,line);
+        address.append(part);
+      });
+    }
+  }
   for(const map of root.querySelectorAll<HTMLAnchorElement>('.v1-event-map[data-venue]')){
     map.setAttribute('aria-label',inviteLanguage==='mr'?`${translated(map.dataset.venue!)} हे स्थळ नकाशावर पाहा`:`Open ${map.dataset.venue} in Google Maps`);
   }
