@@ -26,6 +26,14 @@ body:has(.v1-opening) #root{width:100%;min-height:100svh}
 .v1-opening{position:fixed;inset:0;width:100%;height:100vh;height:100dvh;min-height:0;display:block;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;background:var(--invite-frame-color,#740d10)}
 .v1-scene{position:relative;width:100%;height:100%;display:grid;place-items:center;overflow:hidden;scroll-snap-align:start;scroll-snap-stop:always}
 .v1-scene:not(.v1-scene-visible){visibility:hidden}
+/* Freeze hidden frames, including map-pin and pseudo-element animations. */
+.v1-scene:not(.v1-scene-active) *,
+.v1-scene:not(.v1-scene-active) *::before,
+.v1-scene:not(.v1-scene-active) *::after,
+.v1-motion-paused .v1-scene *,
+.v1-motion-paused .v1-scene *::before,
+.v1-motion-paused .v1-scene *::after{animation-play-state:paused!important}
+.v1-scene:not(.v1-scene-active) *{will-change:auto!important}
 .v1-opening-scene{background:var(--invite-frame-color,#740d10)}
 .v1-announcement-scene{background:#f9c9ad}
 .v1-family-scene{background:#f9c9ad}

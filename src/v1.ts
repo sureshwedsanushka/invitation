@@ -249,7 +249,10 @@ const floral = root.querySelectorAll<HTMLElement>('.v1-left,.v1-right');
 const logo = root.querySelector<HTMLElement>('.v1-logo')!;
 const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)');
 const scenes = Array.from(root.querySelectorAll<HTMLElement>('.v1-scene'));
-scenes.forEach((scene,index)=>scene.classList.toggle('v1-scene-visible',index===0));
+scenes.forEach((scene,index)=>{
+  scene.classList.toggle('v1-scene-visible',index===0);
+  scene.classList.toggle('v1-scene-active',index===0);
+});
 let activeSceneIndex = 0;
 function syncSceneChrome(scene:HTMLElement){
   const peach=scene.matches('.v1-announcement-scene,.v1-family-scene,.v1-haldi-scene');
@@ -270,6 +273,32 @@ let trackingTouch = false;
 let wheelGestureLocked = false;
 let wheelUnlockTimer = 0;
 let resizeAlignmentPending=false;
+
+// Own each entrance timeline so leaving a frame pauses it at its current point.
+const sceneTimelines=new Map<gsap.core.Timeline,HTMLElement>();
+function sceneCanAnimate(scene:HTMLElement){
+  return !document.hidden&&!tapLocked&&scene===scenes[activeSceneIndex];
+}
+function createSceneTimeline(element:HTMLElement,options:gsap.TimelineVars={}){
+  const scene=element.closest<HTMLElement>('.v1-scene')!;
+  const onComplete=options.onComplete;
+  const animation=gsap.timeline({...options,paused:!sceneCanAnimate(scene),onComplete:()=>{
+    sceneTimelines.delete(animation);
+    onComplete?.();
+  }});
+  sceneTimelines.set(animation,scene);
+  return animation;
+}
+function syncSceneMotion(){
+  root.classList.toggle('v1-motion-paused',document.hidden||tapLocked);
+  scenes.forEach((scene,index)=>scene.classList.toggle('v1-scene-active',index===activeSceneIndex));
+  for(const [animation,scene] of sceneTimelines){
+    const paused=!sceneCanAnimate(scene);
+    if(animation.paused()!==paused)animation.paused(paused);
+  }
+}
+document.addEventListener('visibilitychange',syncSceneMotion);
+syncSceneMotion();
 
 const pageTwoReady = (async () => {
   const pages = await fetch(assetUrl('canva-pages.json')).then(response => response.json());
@@ -695,7 +724,7 @@ function revealSangeetPage(){
     }
     gsap.set([canopy,stage],{opacity:0});
     gsap.set([stage,title,schedule,venue],{y:13});
-    const reveal=gsap.timeline({onComplete:()=>{
+    const reveal=createSceneTimeline(pageSix,{onComplete:()=>{
       gsap.set(targets,{clearProps:'opacity,transform'});
       pageSix.classList.remove('v1-p6-entering');
       pageSix.classList.add('v1-p6-revealed');
@@ -790,7 +819,7 @@ function revealWeddingPage(){
     gsap.set(couple,{opacity:0,y:12});
     gsap.set([title,schedule,venue],{opacity:0,y:13});
     const textStart=1.42;
-    const reveal=gsap.timeline({onComplete:()=>{
+    const reveal=createSceneTimeline(pageSeven,{onComplete:()=>{
       gsap.set(targets,{clearProps:'opacity,transform'});
       pageSeven.classList.remove('v1-p7-entering');
       pageSeven.classList.add('v1-p7-revealed');
@@ -804,6 +833,7 @@ function revealWeddingPage(){
 }
 
 function finishIntro() {
+  if(timeline)sceneTimelines.delete(timeline);
   timeline?.kill();
   gsap.set([medallion, ganesh, prayer, ...later], {clearProps:'all'});
   gsap.set(floral,{opacity:1});
@@ -818,20 +848,22 @@ function finishIntro() {
 function navigateToScene(scene:HTMLElement,onComplete?:()=>void){
   if(tapLocked)return;
   tapLocked=true;
+  syncSceneMotion();
   scene.classList.add('v1-scene-visible');
   const html=document.documentElement;
   html.classList.add('v1-page-transition');
-  const sceneOffset=()=>scene.getBoundingClientRect().top-opening.getBoundingClientRect().top+opening.scrollTop;
+  // Measure once before the animation; the glide loop only writes scroll position.
+  const from=opening.scrollTop;
+  const destination=scene.getBoundingClientRect().top-opening.getBoundingClientRect().top+from;
   let finished=false;
   const finish=()=>{
     if(finished)return;
     finished=true;
-    opening.scrollTo({top:sceneOffset(),left:0,behavior:'instant'});
+    opening.scrollTo({top:destination,left:0,behavior:'instant'});
     html.classList.remove('v1-page-transition');
-    activeSceneIndex=scenes.indexOf(scene);
-    applySceneState(activeSceneIndex);
-    scenes.forEach(candidate=>candidate.classList.toggle('v1-scene-visible',candidate===scene));
     tapLocked=false;
+    applySceneState(scenes.indexOf(scene));
+    scenes.forEach(candidate=>candidate.classList.toggle('v1-scene-visible',candidate===scene));
     if(resizeAlignmentPending){
       resizeAlignmentPending=false;
       alignActiveSceneAfterResize();
@@ -839,15 +871,14 @@ function navigateToScene(scene:HTMLElement,onComplete?:()=>void){
     onComplete?.();
   };
   if(prefersReduced.matches){finish();return;}
-  if(Math.abs(opening.scrollTop-sceneOffset())<1){finish();return;}
-  const from=opening.scrollTop;
+  if(Math.abs(from-destination)<1){finish();return;}
   const duration=850;
   const started=performance.now();
   const glide=(now:number)=>{
     if(finished)return;
     const progress=Math.min(1,(now-started)/duration);
     const eased=progress<.5?4*progress*progress*progress:1-Math.pow(-2*progress+2,3)/2;
-    opening.scrollTo({top:from+(sceneOffset()-from)*eased,left:0,behavior:'instant'});
+    opening.scrollTo({top:from+(destination-from)*eased,left:0,behavior:'instant'});
     if(progress<1)window.requestAnimationFrame(glide);
     else finish();
   };
@@ -943,6 +974,7 @@ root.addEventListener('wheel',event=>{
 
 function applySceneState(index:number){
   activeSceneIndex=index;
+  syncSceneMotion();
   const currentScene=scenes[index];
   syncSceneChrome(currentScene);
   pageSix?.classList.toggle('v1-p6-live',currentScene===pageSix);
@@ -961,11 +993,12 @@ function applySceneState(index:number){
   if(currentScene===pageSeven)revealWeddingPage();
 }
 const sceneObserver=new IntersectionObserver(entries=>{
+  if(tapLocked)return;
   const visible=entries.filter(entry=>entry.isIntersecting&&entry.intersectionRatio>=.55)
     .sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
   if(!visible)return;
   const index=scenes.indexOf(visible.target as HTMLElement);
-  if(index<0)return;
+  if(index<0||index===activeSceneIndex)return;
   applySceneState(index);
 },{root:opening,threshold:[.55,.78]});
 scenes.forEach(scene=>sceneObserver.observe(scene));
@@ -983,11 +1016,11 @@ function revealFamilyPage(){
     }
     const strands=Array.from(familyArt.querySelectorAll<HTMLElement>('[data-layer^="jasmine-strand-"]'));
     gsap.set(strands,{opacity:0,y:-70});
-    const drop=gsap.timeline({onComplete:()=>{
+    const drop=createSceneTimeline(familyPage,{onComplete:()=>{
       familyArt.classList.add('v1-p3-landed');
       const text=Array.from(familyCopy.children) as HTMLElement[];
       const group=(...labels:string[])=>text.filter(element=>labels.includes(element.dataset.layer??''));
-      const reveal=gsap.timeline();
+      const reveal=createSceneTimeline(familyPage);
       const show=(elements:HTMLElement[],at:number,fadeDuration=textRevealTiming.duration,movementDuration=fadeDuration)=>{
         reveal.to(elements,{opacity:1,duration:fadeDuration,ease:'sine.out'},at);
         reveal.to(elements,{y:0,duration:movementDuration,ease:'sine.out'},at);
@@ -1013,7 +1046,7 @@ function revealMehendiPage(){
     const venue=pageFour.querySelector<HTMLElement>('.v1-mehendi-details .v1-event-venue')!;
     const henna=Array.from(pageFour.querySelectorAll<SVGSVGElement>('.v1-mehendi-henna'));
     const hennaStrokes=henna.flatMap(motif=>Array.from(motif.querySelectorAll<SVGPathElement>('path')));
-    const reveal=gsap.timeline();
+    const reveal=createSceneTimeline(pageFour);
     gsap.set([title,schedule,venue],{opacity:0,y:13});
     revealEventText(reveal,title,schedule,venue,0);
     if(prefersReduced.matches){
@@ -1052,7 +1085,7 @@ function revealHaldiPage(){
     gsap.set(settlingLayers,{y:10});
     gsap.set(garlandDrops,{yPercent:-24});
     gsap.set([title,schedule,venue],{opacity:0,y:12});
-    const reveal=gsap.timeline({onComplete:()=>{
+    const reveal=createSceneTimeline(pageFive,{onComplete:()=>{
       pageFive.classList.remove('v1-p5-entering');
       pageFive.classList.add('v1-p5-revealed','v1-p5-live');
     }})
@@ -1077,7 +1110,7 @@ const pageTwoObserver = new IntersectionObserver(entries => {
   void pageTwoReady.then(() => window.setTimeout(() => {
     const text = Array.from(announcementCopy.children) as HTMLElement[];
     const group = (...labels:string[]) => text.filter(element => labels.includes(element.dataset.layer ?? ''));
-    const reveal = gsap.timeline();
+    const reveal = createSceneTimeline(nextPage);
     const show = (
       elements:HTMLElement[],
       position:number|string,
@@ -1094,21 +1127,21 @@ const pageTwoObserver = new IntersectionObserver(entries => {
     show(group('Suresh','and','Anushka'),namesStart);
     show(group('ARE GETTING MARRIED'),namesEnd,prefersReduced.matches ? .2 : textRevealTiming.closingFade,prefersReduced.matches ? .2 : textRevealTiming.duration);
   }, prefersReduced.matches ? 40 : 450));
-}, {threshold: .55});
+}, {root:opening,threshold: .55});
 pageTwoObserver.observe(nextPage);
 
 familyArt.classList.add('v1-p3-live');
 void Promise.all([pageThreeReady,pageFourReady,pageFiveReady,pageSixReady,pageSevenReady]).catch(error=>console.error('Unable to prepare the remaining V1 pages',error));
 
 Promise.all(Array.from(page.querySelectorAll('img')).map(img=>img.complete?Promise.resolve():new Promise<void>(resolve=>{img.addEventListener('load',()=>resolve(),{once:true});img.addEventListener('error',()=>resolve(),{once:true});}))).then(()=>{
-  if(prefersReduced.matches){gsap.set(page,{opacity:0});finishIntro();gsap.fromTo(page,{opacity:0},{opacity:1,duration:.45,ease:'sine.out'});return;}
+  if(prefersReduced.matches){gsap.set(page,{opacity:0});finishIntro();createSceneTimeline(page).fromTo(page,{opacity:0},{opacity:1,duration:.45,ease:'sine.out'});return;}
   gsap.set([ganesh,medallion,prayer,...later, ...floral],{opacity:0});
   // Keep its final layout fixed and glide from the centre using a transform.
   gsap.set(ganesh,{top:'6.2%',yPercent:358});
   gsap.set(medallion,{top:'4.2%',scale:.94,transformOrigin:'50% 50%'});
   gsap.set(prayer,{y:14});
   gsap.set(logo,{scale:.985,transformOrigin:'50% 50%'});
-  timeline=gsap.timeline({onComplete:finishIntro});
+  timeline=createSceneTimeline(page,{onComplete:finishIntro});
   timeline.to(ganesh,{opacity:1,duration:.75,ease:'sine.out'},.2)
     .to(ganesh,{yPercent:0,duration:1.45,ease:'sine.inOut'},1.0)
     .to(medallion,{opacity:1,scale:1,duration:1.0,ease:'sine.inOut'},1.8)
