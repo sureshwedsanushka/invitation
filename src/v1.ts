@@ -656,7 +656,7 @@ const pageFourReady=(async()=>{
   appendArtwork(art,mehendiLayers(data).filter(layer=>!['gold-divider','map-pin'].includes(layer.label)),'v1-p4-art');
   addMehendiHennaDrawing(art);
   addEventDetails(pageFour.querySelector<HTMLElement>('.v1-mehendi-details')!,{
-    top:'33.7%',weekday:'THURSDAY',month:'DEC',day:'17',year:'2026',time:'4:00 PM ONWARDS',
+    top:'33.7%',weekday:'WEDNESDAY',month:'DEC',day:'16',year:'2026',time:'4:00 PM ONWARDS',
     venue:'401 Ram Chs',address:['Maruti Nagar, Ashokvan','Dahisar East, Mumbai - 400068'],mapUrl:'https://maps.app.goo.gl/KEqnMNEmWQvNAJam9?g_st=iw',
   });
 })();
