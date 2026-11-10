@@ -51,7 +51,7 @@ export const marathiCopy: Record<string, string> = {
   'Mumbai - 400010': 'मुंबई - ४०००१०',
   '401 Ram Chs': '४०१ राम सोसायटी',
   'Gokulanand Hotel': 'गोकुळानंद हॉटेल',
-  'Shiv Vallabh Rd, Western Express Highway,': 'शिव वल्लभ रोड, पश्चिम द्रुतगती महामार्ग,',
+  'Shiv Vallabh Rd, Western Express Highway,': 'शिव वल्लभ रोड, वेस्टर्न एक्सप्रेस हायवे,',
   'Dahisar (E), Mumbai - 400068': 'दहिसर (पूर्व), मुंबई - ४०००६८',
   'Mumbai - 400068': 'मुंबई - ४०००६८',
   'Maruti Nagar, Ashokvan': 'मारुती नगर, अशोकवन',
