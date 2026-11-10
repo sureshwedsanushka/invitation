@@ -671,7 +671,7 @@ const pageFiveReady=(async()=>{
   const details=pageFive.querySelector<HTMLElement>('.v1-haldi-details')!;
   addEventDetails(details,{
     top:'27%',weekday:'THURSDAY',month:'DEC',day:'17',year:'2026',time:'6:00 PM ONWARDS',venue:'Gokulanand Hotel',
-    address:['Shankheshwar Nagar, Borivali','Mumbai - 400068'],mapUrl:'https://maps.google.com/maps?vet=10CAAQoqAOahcKEwiIi-mV_sKXAxUAAAAAHQAAAAAQBg..i&rlz=1C5OZZY_enAU1196AU1196&sca_esv=3f5bbf6b2af2913f&udm&fvr=1&pvq=CgwvZy8xamt5bTJjMTciFgoQZ29rdWxhbmFuZCBob3RlbBACGAM&lqi=ChBnb2t1bGFuYW5kIGhvdGVsSKfYxNnHkICACFoaEAAQARgAGAEiEGdva3VsYW5hbmQgaG90ZWySAQhidXNfc3RvcA&cs=0&um=1&ie=UTF-8&fb=1&gl=au&sa=X&ftid=0x3be7b0c2bd265787:0x5cbfe49639cad99c',peach:true,haldi:true,
+    address:['Shiv Vallabh Rd, Western Express Highway,','Dahisar (E), Mumbai - 400068'],mapUrl:'https://www.google.com/maps/search/?api=1&query=Gokulanand+Hotel%2C+Shiv+Vallabh+Rd%2C+Western+Express+Highway%2C+Dahisar+East%2C+Mumbai+400068',peach:true,haldi:true,
     ...invitation.haldiLocation,
   });
 })();
